@@ -1,0 +1,12 @@
+nav.top_menu ul li a {
+	background: url(../img/top_menu.jpg) repeat-x !important;
+	font: bold 16px Arial, Tahoma !important;
+}
+nav.top_menu ul li a:hover {
+	background: url(../img/top_menu_hover.jpg) repeat-x !important;
+}
+
+p.rightside_bottom {
+	background: url(../img/rightside_bottom.jpg) bottom no-repeat;
+	top: 73px !important;
+}

@@ -1,0 +1,35 @@
+nav.top_menu ul li {
+	float: left;
+}
+nav.top_menu ul li a {
+	zoom: 1;
+	*display: inline !important;
+	background: url(../img/top_menu.jpg) repeat-x !important;
+	font: bold 16px Arial, Tahoma !important;
+	padding: 6px 0 0 !important;
+	width: 141px !important;
+}
+nav.top_menu ul li:first-child a {
+	width: 140px !important;
+}
+nav.top_menu ul li a:hover {
+	background: url(../img/top_menu_hover.jpg) repeat-x !important;
+}
+
+#container {
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+h3 a:hover {
+	cursor: pointer;
+}
+aside {
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+aside img {
+	margin: 50px auto 73px !important;
+}
+footer div + p {
+	margin: 0 -90px 0 0;
+}
