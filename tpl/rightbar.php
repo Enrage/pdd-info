@@ -1,4 +1,5 @@
 <?php $rows = $this->m->get_rightbar(); ?>
+	</div>
 		<aside>
 			<form action="" method="post">
 				<p><input type="text" name="search" placeholder="Что искать"></p>

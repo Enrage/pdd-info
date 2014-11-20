@@ -38,22 +38,51 @@ class model {
 
 	public function get_top_menu() {
 		$query = "SELECT id_menu, name_menu FROM menu";
-		$res = $this->mysqli->query($query);
-		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$rows[] = $row;
+		$stmt = $this->mysqli->stmt_init();
+		if(!$stmt->prepare($query)) {
+			print "Ошибка подготовки запроса";
 		}
-		return $rows;
+		else {
+			$stmt->execute();
+			$res = $stmt->get_result();
+			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+				$rows[] = $row;
+			}
+			return $rows;
+			$stmt->close();
+		}
 	}
 	public function get_rightbar() {
 		$query = "SELECT * FROM bilet";
-		$res = $this->mysqli->query($query);
-		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$rows[] = $row;
+		$stmt = $this->mysqli->stmt_init();
+		if(!$stmt->prepare($query)) {
+			print "Ошибка подготовки запроса";
 		}
-		return $rows;
+		else {
+			$stmt->execute();
+			$res = $stmt->get_result();
+			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+				$rows[] = $row;
+			}
+			return $rows;
+			$stmt->close();
+		}
 	}
 	public function get_news() {
-
+		$query = "SELECT id_news, title, description, date, img_src FROM news";
+		$stmt = $this->mysqli->stmt_init();
+		if(!$stmt->prepare($query)) {
+			print "Ошибка подготовки запроса";
+		}
+		else {
+			$stmt->execute();
+			$res = $stmt->get_result();
+			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+				$rows[] = $row;
+			}
+			return $rows;
+			$stmt->close();
+		}
 	}
 }
 ?>

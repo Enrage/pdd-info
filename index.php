@@ -17,7 +17,7 @@ else {
 }
 if(class_exists($class)) {
 	$obj = new $class;
-	$obj->get_body();
+	$obj->get_body($class);
 }
 else {
 	die("<p>Неправильные данные для входа</p>");
