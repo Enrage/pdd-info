@@ -1,4 +1,3 @@
-<?php $rows = $this->m->get_rightbar(); ?>
 	</div>
 		<aside>
 			<form action="" method="post">
@@ -7,7 +6,7 @@
 			</form>
 			<p class="bilet_pdd">ПДД<br>билеты</p>
 			<ul>
-				<?php foreach($rows as $value): ?>
+				<?php foreach($rightbar as $value): ?>
 				<li><a href="?option=bilet&amp;id_bilet=<?=$value['id_bilet']?>"><?=$value['number_bilet']?></a></li>
 				<?php endforeach; ?>
 			</ul>

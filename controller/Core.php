@@ -9,13 +9,16 @@ abstract class Core {
 		return true;
 	}
 	protected function get_top_menu() {
-		return true;
+		$result = $this->m->get_top_menu();
+		return $result;
 	}
 	protected function get_rightbar() {
-		return true;
+		$result = $this->m->get_rightbar();
+		return $result;
 	}
 	protected function get_footer() {
-		return true;
+		$result = $this->m->get_top_menu();
+		return $result;
 	}
 	public function get_body($tpl) {
 		$header = $this->get_header();

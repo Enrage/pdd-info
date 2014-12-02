@@ -1,4 +1,3 @@
-<?php $res = $this->m->get_top_menu(); ?>
 <footer>
 	<p class="car1"><img src="img/sports-car_04.png" alt="Автомобиль"></p>
 	<p class="konus2"><img src="img/konus.png" alt="Конус"></p>
@@ -9,8 +8,8 @@
 			<li><a href="?option=news">Новости</a></li>
 			<li><a href="?option=moto">Мото</a></li>
 			<li><a href="?option=pdd">ПДД</a></li>
-			<?php foreach($res as $row): ?>
-			<li><a href="?option=menu&amp;id=<?=$row['id_menu']?>"><?=$row['name_menu']?></a></li>
+			<?php foreach($footer as $row): ?>
+			<li><a href="?option=menu&amp;id_menu=<?=$row['id_menu']?>"><?=$row['name_menu']?></a></li>
 			<?php endforeach; ?>
 		</ul>
 	</nav>

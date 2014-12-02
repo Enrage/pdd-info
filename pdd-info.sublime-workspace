@@ -1,0 +1,1052 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cla",
+				"class	Attr"
+			],
+			[
+				"adm",
+				"admin_pdd"
+			],
+			[
+				"mod",
+				"model/"
+			],
+			[
+				"login",
+				"login_pdd"
+			],
+			[
+				"lo",
+				"login_pdd"
+			],
+			[
+				"pass",
+				"pass_pdd"
+			],
+			[
+				"id",
+				"id_news"
+			],
+			[
+				"get",
+				"get_rightbar  (function)"
+			],
+			[
+				"tex",
+				"text"
+			],
+			[
+				"jp",
+				"1.jpg	w:403 h:604"
+			],
+			[
+				"imagepng",
+				"imagepng  (function)"
+			],
+			[
+				"imagecopyres",
+				"imagecopyresized  (function)"
+			],
+			[
+				"conf",
+				"config.php"
+			],
+			[
+				"incl",
+				"incl1	include_once …"
+			],
+			[
+				"isset",
+				"isset"
+			],
+			[
+				"stm",
+				"stmt_init"
+			],
+			[
+				"substr_c",
+				"substr_count"
+			],
+			[
+				"botto",
+				"bottom_banner"
+			],
+			[
+				"print",
+				"print"
+			],
+			[
+				"exec",
+				"execute"
+			],
+			[
+				"clas",
+				"class"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"req",
+				"req1	require_once …"
+			],
+			[
+				"heade",
+				"header  (function)"
+			],
+			[
+				"head",
+				"header"
+			],
+			[
+				"sess",
+				"sessionid"
+			],
+			[
+				"sessi",
+				"sessionid"
+			],
+			[
+				"i",
+				"inc/"
+			],
+			[
+				"cl",
+				"class"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"session",
+				"sessionCount  (variable)"
+			],
+			[
+				"sessio",
+				"sessionCount"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"local",
+				"localhost"
+			],
+			[
+				"s",
+				"sessionid"
+			],
+			[
+				"IN",
+				"INTO"
+			],
+			[
+				"conn",
+				"connect_errno"
+			],
+			[
+				"user",
+				"userid"
+			],
+			[
+				"DB",
+				"DB_PASS"
+			],
+			[
+				"read",
+				"ready	$(document).ready"
+			],
+			[
+				"ngi",
+				"nginx"
+			],
+			[
+				"rea",
+				"ready	$(document).ready"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "adminpdd/controller/Core_Admin.php",
+			"settings":
+			{
+				"buffer_size": 587,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/php.sublime-build",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"ssp",
+				"Set Syntax: PHP"
+			],
+			[
+				"ssphp",
+				"Set Syntax: PHP"
+			],
+			[
+				"Git: Push Current Branch",
+				"Git: Push Current Branch"
+			],
+			[
+				"Git: Quick Commit",
+				"Git: Quick Commit"
+			],
+			[
+				"Git: Add...",
+				"Git: Add..."
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"push",
+				"Git: Push"
+			],
+			[
+				"pull",
+				"Git: Pull Current Branch"
+			],
+			[
+				"quic",
+				"Git: Quick Commit"
+			],
+			[
+				"cus",
+				"Git: Custom Command"
+			],
+			[
+				"git",
+				"Git: Init"
+			],
+			[
+				"fetc",
+				"Git: Fetch"
+			],
+			[
+				"add",
+				"Git: Add..."
+			],
+			[
+				"custo",
+				"Git: Custom Command"
+			],
+			[
+				"bra",
+				"Git: Change Branch"
+			],
+			[
+				"merg",
+				"Git: Merge Branch"
+			],
+			[
+				"qui",
+				"Git: Quick Commit"
+			],
+			[
+				"git add",
+				"Git: Add Current File"
+			],
+			[
+				"comm",
+				"Git: Quick Commit"
+			],
+			[
+				"com",
+				"Git: Quick Commit"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"enable",
+				"SublimeLinter: Enable Debug Mode"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"su",
+				"SublimeLinter: Choose Gutter Theme"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"Git: Pull Current Branch",
+				"Git: Pull Current Branch"
+			],
+			[
+				"Git: Push",
+				"Git: Push Current Branch"
+			],
+			[
+				"co",
+				"Git: Commit"
+			],
+			[
+				"cust",
+				"Git: Custom Command"
+			],
+			[
+				"pus",
+				"Git: Push Current Branch"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"ss",
+				"Set Syntax: HTML"
+			],
+			[
+				"ssht",
+				"Set Syntax: HTML"
+			],
+			[
+				"ssph",
+				"Set Syntax: PHP"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 544.0
+	},
+	"console":
+	{
+		"height": 181.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/nginx/html/pdd-info"
+	],
+	"file_history":
+	[
+		"/C/nginx/html/pdd-info/pdd-info.sublime-project",
+		"/C/nginx/html/target/index.php",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/nginx/html/pdd-info/adminpdd/index.php",
+		"/C/nginx/html/pdd-info/adminpdd/model/admin_model.php",
+		"/C/nginx/html/pdd-info/adminpdd/auth/index.php",
+		"/C/nginx/html/zdrav-textile.ru/config.php",
+		"/C/nginx/html/pdd-info/model/model.php",
+		"/C/nginx/html/pdd-info/controller/Core.php",
+		"/C/nginx/html/zdrav-textile.ru/admin/auth/enter.php",
+		"/C/nginx/html/zdrav-textile.ru/admin/auth/index.php",
+		"/C/nginx/html/zdrav-textile.ru/admin/index.php",
+		"/C/nginx/html/pdd-info/controller/news.php",
+		"/C/nginx/html/target/config.php",
+		"/C/nginx/html/pdd-info/config.php",
+		"/C/nginx/html/pdd-info/controller/main.php",
+		"/C/nginx/html/pdd-info/adminpdd/css/style.css",
+		"/C/nginx/html/pdd-info/index.php",
+		"/E/Soft/Projects/Sites/zdrav-textile.ru/admin/index.php",
+		"/C/nginx/html/zdrav-textile.ru/admin/functions/functions.php",
+		"/E/Soft/Projects/Sites/zdrav-textile.ru/controller/cgi-bin/.htaccess",
+		"/E/Soft/Projects/Sites/zdrav-textile.ru/model/model.php",
+		"/C/nginx/html/pdd-info/controller/moto.php",
+		"/C/nginx/html/pdd-info/tpl/moto.php",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Color Scheme - Default/Black Pearl II.tmTheme",
+		"/C/nginx/html/pdd-info/css/style.css",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Color Scheme - Default/Mac Classic.tmTheme",
+		"/C/nginx/html/phpMyAdmin/setup/scripts.js",
+		"/C/nginx/html/pdd-info/tpl/header.php",
+		"/C/nginx/html/pdd-info/controller/view.php",
+		"/C/nginx/html/pdd-info/tpl/main.php",
+		"/C/nginx/html/pdd-info/tpl/news.php",
+		"/C/nginx/html/pdd-info/tpl/view.php",
+		"/C/nginx/html/pdd-info/tpl/rightbar.php",
+		"/C/nginx/html/pdd-info/tpl/top_menu.php",
+		"/C/nginx/html/pdd-info/tpl/footer.php",
+		"/C/nginx/html/pdd-info/tpl/motoview.php",
+		"/C/nginx/html/pdd-info/controller/motoview.php",
+		"/C/nginx/html/pdd-info/controller/menu.php",
+		"/C/nginx/html/pdd-info/tpl/menu.php",
+		"/C/nginx/html/target/avatar.php",
+		"/C/nginx/html/pdd-info/fonts/Roboto-Italic.woff",
+		"/C/nginx/html/target/target.sublime-project",
+		"/C/nginx/html/target/target.sql",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Seti_UI/Seti.sublime-theme",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Seti_UI/Main/Widget - Seti.stTheme",
+		"/C/nginx/html/new.html",
+		"/C/nginx/html/pdd-info/tpl/top_banner.php",
+		"/D/connection_db.php",
+		"/C/nginx/php/php.ini",
+		"/C/nginx/html/pdd-info/tpl/bottom_banner.php",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Lyte/Lyte-NoBorder.sublime-theme",
+		"/C/nginx/html/pdd-info/tpl/pdd.php",
+		"/C/nginx/html/pdd-info/controller/pdd.php",
+		"/C/nginx/html/target/test.json",
+		"/C/nginx/html/pdd-info/js/script.js",
+		"/C/nginx/html/pdd-info/js/pngfix.js",
+		"/C/nginx/html/pdd-info/tpl/index.php",
+		"/D/index.html",
+		"/C/nginx/html/pdd-info/tpl/bottom_banner",
+		"/C/nginx/html/pdd-info/rightbar.php",
+		"/C/nginx/html/pdd-info/footer.php",
+		"/C/nginx/html/pdd-info/top_menu.php",
+		"/C/nginx/html/pdd-info/header.php",
+		"/C/nginx/html/pdd-info/index.html",
+		"/C/nginx/html/pdd-info/inc/db.php",
+		"/C/nginx/html/pdd-info/bilet.html",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Phoenix/Phoenix Dark.sublime-theme",
+		"/C/Users/Rage/Downloads/phoenix-theme-master/Theme - Phoenix/Phoenix Dark.sublime-theme",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Spacegray/README.md",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Soda/Soda Dark 3.sublime-theme",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Tech49/Tech49.sublime-theme",
+		"/C/nginx/html/pdd-info/css/ie6.css",
+		"/C/Users/Rage/Downloads/tech49-theme-master/Theme - Tech49/Tech49.sublime-theme",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/D/pdd-info/index.html",
+		"/C/Program Files/MySQL/MySQL Server 5.6/docs/ChangeLog",
+		"/C/nginx/html/pdd-info/.git/logs/refs/remotes/pdd-info/master",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/nginx/html/pdd-info/readme.md",
+		"/C/Users/Rage/.ssh/id_rsa.pub",
+		"/C/Users/Rage/.ssh/id_rsa",
+		"/C/nginx/html/pdd-info/new.html",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Soda/README.md",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - Spacegray/Spacegray Eighties.sublime-theme",
+		"/C/Users/Rage/Downloads/lyte-theme-master/lyte-theme-master/Lyte-NoBorder.sublime-theme",
+		"/C/nginx/html/hyip/tmpl/install.tpl",
+		"/C/nginx/html/hyip/inc/libs/plugins/outputfilter.trimwhitespace.php",
+		"/C/Users/Rage/Downloads/JavaScript & jQuery/jadisk1/AutoPlay/Source/Source-2lesson/script.js",
+		"/C/nginx/html/hyip/webstat/index.html",
+		"/C/nginx/html/hyip/settings.php",
+		"/C/nginx/html/hyip/install.php",
+		"/C/nginx/run.bat",
+		"/C/nginx/stop.bat",
+		"/F/Soft/Разное для Web-разработки/[MIXLIP.RU]_xaip/xaip/public_html/settings.php",
+		"/F/Soft/Разное для Web-разработки/[MIXLIP.RU]_xaip/xaip/public_html/reg.php",
+		"/F/Soft/Разное для Web-разработки/[MIXLIP.RU]_xaip/xaip/public_html/inc/signup.inc",
+		"/E/Projects/Sites/zdrav-textile.ru/views/ishop/css/style.css",
+		"/E/Projects/Sites/zdrav-textile.ru/controller/controller.php",
+		"/E/Projects/Sites/zdrav-textile.ru/views/ishop/cat.php",
+		"/D/json.php",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/User/Xdebug.sublime-settings",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Xdebug Client/Xdebug.sublime-settings",
+		"/C/nginx/html/index.php",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Theme - VimBlackboard/VimBlackboard.sublime-theme",
+		"/C/nginx/html/phpMyAdmin/setup/styles.css",
+		"/E/Projects/Sites/dark/css/style.css",
+		"/E/Projects/Sites/dark/css/PIE.htc",
+		"/C/Users/Rage/Downloads/Inconsolata-LGC-master/Inconsolata-LGC-master/README",
+		"/C/Users/Rage/Downloads/Inconsolata-LGC-master/Inconsolata-LGC-master/Inconsolata-LGC.sfd",
+		"/C/nginx/html/test/script.js",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/nginx/html/test/README.md",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/GitGutter/Default (Windows).sublime-keymap",
+		"/C/Users/Rage/AppData/Roaming/Sublime Text 3/Packages/GitGutter/GitGutter.sublime-settings",
+		"/C/nginx/html/test/style.css",
+		"/C/nginx/html/test/index.php",
+		"/C/nginx/logs/error.log",
+		"/C/nginx/html/phpMyAdmin/config.inc.php",
+		"/C/nginx/conf/nginx.conf",
+		"/C/Users/Rage/Downloads/adminer-4.1.0-mysql.php",
+		"/C/nginx/html/index.html",
+		"/C/Program Files/MySQL/MySQL Server 5.6/my.ini",
+		"/C/Program Files/MySQL/MySQL Server 5.6/my-default.ini",
+		"/C/Users/Rage/Downloads/WNMPTutorial/my.ini",
+		"/E/Projects/pdd-info.sql",
+		"/F/Soft/Разное 2/product-gallery.php",
+		"/F/Soft/Sublime Text 3/Packages/User/getElementById.sublime-snippet"
+	],
+	"find":
+	{
+		"height": 44.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"pass",
+			"top_menu",
+			"none",
+			"login_pdd",
+			"background",
+			"id_news",
+			"row",
+			"get_text_menu",
+			"id_menu",
+			"5",
+			"mbstring",
+			"130",
+			"25",
+			"34",
+			"45",
+			"34",
+			"150",
+			"200",
+			"34",
+			"25",
+			"34",
+			"25",
+			"10",
+			"25",
+			"43",
+			"25",
+			"id_news",
+			"class",
+			"value",
+			"120",
+			"140",
+			"26",
+			"20",
+			"30",
+			"125",
+			"4",
+			"255",
+			"180",
+			"140",
+			"200",
+			"240",
+			"130",
+			"30",
+			"220",
+			"200",
+			"245",
+			"190",
+			"235",
+			"125",
+			"4",
+			"200",
+			"230",
+			"30",
+			"180",
+			"140",
+			"190",
+			"2",
+			"150",
+			"57",
+			"30",
+			"211",
+			"81",
+			"1",
+			"125",
+			"81",
+			"25",
+			"170",
+			"35",
+			"40",
+			"30",
+			"60",
+			"50",
+			"215",
+			"81",
+			"10",
+			"57",
+			"30",
+			"45",
+			"57",
+			"60",
+			"38",
+			"125",
+			"45",
+			"30",
+			"38",
+			"57",
+			"13",
+			"57",
+			"30",
+			"10",
+			"40",
+			"10",
+			"57",
+			"38",
+			"160",
+			"81",
+			"30",
+			"38",
+			"fold-open",
+			"extens",
+			"debug",
+			"ob_mysqli",
+			"DB",
+			"localhost",
+			"HOST",
+			"super+shift",
+			"Login",
+			"login",
+			"loginco"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"leftbar"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "adminpdd/controller/Core_Admin.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44,
+								44
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 136.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 144.0
+	},
+	"output.xdebug":
+	{
+		"height": 138.0
+	},
+	"project": "pdd-info.sublime-project",
+	"replace":
+	{
+		"height": 83.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"con",
+				"pdd-info\\controller\\Core.php"
+			],
+			[
+				"model",
+				"pdd-info\\model\\model.php"
+			],
+			[
+				"index",
+				"pdd-info\\index.php"
+			],
+			[
+				"cor",
+				"pdd-info\\controller\\Core.php"
+			],
+			[
+				"mode",
+				"pdd-info\\model\\model.php"
+			],
+			[
+				"co",
+				"target\\config.php"
+			],
+			[
+				"style",
+				"pdd-info\\css\\style.css"
+			],
+			[
+				"mto",
+				"pdd-info\\tpl\\moto.php"
+			],
+			[
+				"mai",
+				"pdd-info\\tpl\\main.php"
+			],
+			[
+				"moto",
+				"pdd-info\\tpl\\moto.php"
+			],
+			[
+				"menu",
+				"pdd-info\\tpl\\menu.php"
+			],
+			[
+				"view",
+				"pdd-info\\tpl\\view.php"
+			],
+			[
+				"news",
+				"pdd-info\\tpl\\news.php"
+			],
+			[
+				"men",
+				"pdd-info\\controller\\menu.php"
+			],
+			[
+				"head",
+				"pdd-info\\tpl\\header.php"
+			],
+			[
+				"foote",
+				"pdd-info\\tpl\\footer.php"
+			],
+			[
+				"top",
+				"pdd-info\\tpl\\top_menu.php"
+			],
+			[
+				"right",
+				"pdd-info\\tpl\\rightbar.php"
+			],
+			[
+				"ta",
+				"target\\avatar.php"
+			],
+			[
+				"ma",
+				"pdd-info\\tpl\\main.php"
+			],
+			[
+				"m",
+				"pdd-info\\controller\\main.php"
+			],
+			[
+				"inde",
+				"pdd-info\\index.php"
+			],
+			[
+				"conf",
+				"target\\config.php"
+			],
+			[
+				"jso",
+				"target\\test.json"
+			],
+			[
+				"core",
+				"pdd-info\\controller\\Core.php"
+			],
+			[
+				"main",
+				"pdd-info\\tpl\\main.php"
+			],
+			[
+				"ind",
+				"tpl\\index.php"
+			],
+			[
+				"righ",
+				"tpl\\rightbar.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"15":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"16":
+				{
+					"group": 0,
+					"index": 1
+				},
+				"37":
+				{
+					"group": 0,
+					"index": 2
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 164.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

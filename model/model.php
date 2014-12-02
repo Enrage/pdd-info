@@ -82,6 +82,20 @@ class model {
 			$stmt->close();
 		}
 	}
+	public function get_text_news($id_news) {
+		if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
+		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE id_news = ?";
+		$stmt = $this->mysqli->stmt_init();
+		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		else {
+			$stmt->bind_param('i', $id_news);
+			$stmt->execute();
+			$res = $stmt->get_result();
+			$row = $res->fetch_array(MYSQLI_ASSOC);
+			return $row;
+			$stmt->close();
+		}
+	}
 	// Motonews
 	public function get_motonews() {
 		$query = "SELECT id_moto, title, description, date, img_src FROM moto_news";
@@ -96,6 +110,20 @@ class model {
 				$rows[] = $row;
 			}
 			return $rows;
+			$stmt->close();
+		}
+	}
+	public function get_text_motonews($id_moto) {
+		if(isset($_GET['id_moto'])) $id_moto = (int)$_GET['id_moto'];
+		$query = "SELECT id_moto, title, text, meta_key, meta_desc, date FROM moto_news WHERE id_moto = ?";
+		$stmt = $this->mysqli->stmt_init();
+		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		else {
+			$stmt->bind_param('i', $id_moto);
+			$stmt->execute();
+			$res = $stmt->get_result();
+			$row = $res->fetch_array(MYSQLI_ASSOC);
+			return $row;
 			$stmt->close();
 		}
 	}
