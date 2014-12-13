@@ -4,7 +4,7 @@ include_once '../model/admin_model.php';
 include_once '../../config.php';
 if(isset($_SESSION['auth']['admin'])) {
 	if($_SESSION['auth']['admin']) {
-		header("Location: http://localhost/pdd-info/adminpdd/");
+		header("Location: http://localhost/pdd/adminpdd/");
 		exit();
 	}
 }
@@ -40,6 +40,7 @@ if($_POST) {
 <head>
 	<meta charset="utf-8">
 	<title>Вход в админку</title>
+	<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <div id="main">
@@ -48,8 +49,7 @@ if($_POST) {
 	if(isset($_SESSION['res'])) {
 		echo $_SESSION['res'];
 		unset($_SESSION['res']);
-	}
-	?>
+	} ?>
 		<form action="" method="post" autocomplete="off" id="login">
 			<p><input type="text" name="login_pdd" placeholder="Username"></p>
 			<p><input type="password" name="pass_pdd" placeholder="Password"></p>

@@ -3,10 +3,12 @@ class model {
 	public $mysqli;
 	public function __construct() {
 		try {
-		$this->mysqli = new mysqli(HOST, USER, PASS, DB);
+			$connect = $this->mysqli = new mysqli(HOST, USER, PASS, DB);
+			if(!$connect) throw new Exception("Error connect");
+
 		}
 		catch(Exception $e) {
-			die("Database error");
+			print 'Ошибка: '.$e->getMessage();
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
 	}

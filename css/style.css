@@ -32,7 +32,6 @@ body {
 	width: 1000px;
 	margin: 0 auto;
 }
-
 /* Header */
 header {
 	width: 1000px;
@@ -92,7 +91,7 @@ nav.top_menu ul li a:hover {
 nav.top_menu ul li:first-child a {
 	border-left: none;
 }
-
+.container
 /* Content */
 #main {
 	overflow: hidden;

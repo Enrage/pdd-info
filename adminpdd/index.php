@@ -4,12 +4,12 @@ header("Content-Type:text/html;charset=UTF-8");
 include_once '../config.php';
 include_once 'model/admin_model.php';
 if(!$_SESSION['auth']['admin']) {
-	header("Location: http://localhost/pdd-info/adminpdd/auth/enter.php");
+	header("Location: http://localhost/pdd/adminpdd/auth/enter.php");
 }
 if(isset($_GET['do'])) {
 	if($_GET['do'] == "logout") {
 		unset($_SESSION['auth']);
-		header("Location: http://localhost/pdd-info/adminpdd/auth/enter.php");
+		header("Location: http://localhost/pdd/adminpdd/auth/enter.php");
 	}
 }
 function __autoload($c) {
