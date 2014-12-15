@@ -15,7 +15,7 @@ if($_POST) {
 		$pass_pdd = trim($_POST['pass_pdd']);
 		$query = "SELECT name_pdd, login_pdd, pass_pdd FROM pdd_users WHERE login_pdd = ? AND admin_pdd = 1 LIMIT 1";
 		$stmt = $mysqli->stmt_init();
-		if(!$stmt->prepare($query)) throw new Exception("Error Prepare");
+		if(!$stmt->prepare($query)) throw new Exception("Error Prepare Login");
 		else {
 			$stmt->bind_param('s', $login_pdd);
 			$stmt->execute();
@@ -34,7 +34,7 @@ if($_POST) {
 			$stmt->close();
 		}
 	} catch(Exception $e) {
-		print 'Ошибка: '.$e->getMessage().' в файле '.$e->getFile().' в строке: '.$e->getLine();
+		print 'Ошибка: '.$e->getMessage();
 	}
 }
 ?>
