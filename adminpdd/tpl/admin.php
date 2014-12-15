@@ -1,5 +1,5 @@
 <div id="content">
 	<div class="container">
-		<p>test</p>
+		<p>Главная страница</p>
 	</div>
 </div>

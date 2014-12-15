@@ -91,10 +91,9 @@ nav.top_menu ul li a:hover {
 nav.top_menu ul li:first-child a {
 	border-left: none;
 }
-.container
 /* Content */
 #main {
-	overflow: hidden;
+	overflow: hidden !important;
 }
 #container {
 	position: relative;

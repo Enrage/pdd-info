@@ -6,8 +6,7 @@ class model {
 			$connect = $this->mysqli = new mysqli(HOST, USER, PASS, DB);
 			if(!$connect) throw new Exception("Error connect");
 
-		}
-		catch(Exception $e) {
+		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
@@ -18,8 +17,7 @@ class model {
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) {
 			print "Ошибка подготовки запроса";
-		}
-		else {
+		} else {
 			$stmt->execute();
 			$res = $stmt->get_result();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
@@ -56,8 +54,7 @@ class model {
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) {
 			print "Ошибка подготовки запроса";
-		}
-		else {
+		} else {
 			$stmt->execute();
 			$res = $stmt->get_result();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
@@ -73,8 +70,7 @@ class model {
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) {
 			print "Ошибка подготовки запроса";
-		}
-		else {
+		} else {
 			$stmt->execute();
 			$res = $stmt->get_result();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
@@ -104,8 +100,7 @@ class model {
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) {
 			print "Ошибка подготовки запроса";
-		}
-		else {
+		} else {
 			$stmt->execute();
 			$res = $stmt->get_result();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
@@ -135,8 +130,7 @@ class model {
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) {
 			print "Ошибка подготовки запроса";
-		}
-		else {
+		} else {
 			$stmt->execute();
 			$res = $stmt->get_result();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {

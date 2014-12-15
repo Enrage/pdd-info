@@ -39,7 +39,7 @@ header {
 	width: 100%;
 }
 h1 {
-	color: #fff;
+	color: #88ffff;
 	font: 20px Roboto, Tahoma, Arial, Verdana;
 	padding: 10px 0 0;
 	text-align: center;
@@ -73,14 +73,10 @@ h1 {
 	min-height: 100%;
 	height: auto !important;
 	width: 100%;
-	height: 100%;
 }
 /* Content */
 #main {
 	overflow: hidden;
-	height: auto !important;
-	min-height: 100%;
-	height: 100%;
 }
 #content {
 	float: right;
@@ -88,21 +84,52 @@ h1 {
 	width: 100%;
 }
 .container {
-	background: #eee;
-	min-height: 600px;
-	height: auto !important;
-	height: 100%;
+	background: #e5e5e5;
+	position: relative;
 	padding-bottom: 32000px;
 	margin-bottom: -32000px;
 	margin-right: 200px;
+	min-height: 1450px;
+	z-index: 0;
 }
+.main {
+	margin-top: -15px;
+	height: auto !important;
+	min-height: 100%;
+	height: 100%;
+}
+
+/* Session result */
 .error {
 	color: #FF2828;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
 	text-align: center;
 }
+.error_add {
+	color: red;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
+	text-align: left;
+}
+.success {
+	color: #33ee33;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
+}
+
+/* Login */
 #login {
 	margin-top: 15px;
 	text-align: center;
+}
+#login input[type=text], #login input[type=password] {
+	border-radius: 3px;
+	height: 25px;
+	padding: 0 5px;
+	width: 200px;
+}
+#login input[type=submit] {
+	border-radius: 4px;
+	height: 25px;
+	width: 110px;
 }
 .form_login {
 	position: relative;
@@ -111,35 +138,124 @@ h1 {
 #login p {
 	margin: 5px;
 }
-input[type=submit] {
+input#subm {
 	width: 80px;
 }
+
+/* Admin Panel*/
+/* Edit news/motonews */
 .news_title {
-	padding: 20px 0 0 20px;
-	width: 60%;
+	background: #f5f5f5;
+	border: 1px solid #777;
+	margin: 10px 0 0 20px;
+	padding: 0 0 5px;
+	width: 93%;
+}
+.title_news_table {
+	color: #000;
+	font: bold 16px Roboto, Tahoma, Arial, Verdana;
+	text-transform: uppercase;
+}
+.title_news_table td {
+	background: #cdc;
+	margin: 0 0 20px;
 }
 .news_title td {
-	margin: 5px 0;
+	border-bottom: 1px solid #888;
+	border-left: 1px solid #888;
+	padding: 5px 0;
+}
+.news_title td:first-child {
+	border-left: none;
+	padding: 0 0 0 15px;
 }
 .news_title td a {
-	color: #333;
-	font: 15px Roboto, Tahoma, Arial, Verdana;
+	color: #555;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
 	text-decoration: none;
 }
 .news_title td a:hover {
 	color: blue;
 }
+.news_title td a[href*=delete] {
+	color: red;
+	font: 12px Tahoma, Arial, Verdana;
+}
+.news_title td a[href*=delete]:hover {
+	text-decoration: underline;
+}
 td.add_new {
 	margin: 0 0 15px;
 }
 td.add_new a {
-	color: red;
+	color: #b00;
+	text-decoration: underline;
+	text-transform: uppercase;
 }
+td.add_new a:hover {
+	color: #b00;
+	text-decoration: none;
+}
+.td_date {
+	color: #555;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
+	text-align: center;
+	width: 160px;
+}
+.del_news {
+	text-align: center;
+	width: 110px;
+}
+/* Add/update news/moto_news */
+section {
+	margin: 0 0 30px;
+	padding: 20px 20px 0 20px;
+}
+section p {
+	color: #333;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+	margin: 12px 0;
+}
+section h2, .container h2 {
+	color: #009;
+	font: bold 20px Roboto, Tahoma, Arial, Verdana;
+}
+h2.titles {
+	padding: 15px 0 0 35px;
+}
+input#title_news, input#keywords_news, input#description_news {
+	background: #fff;
+	color: #333;
+	border: 1px solid #ccc;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
+	height: 25px;
+	padding: 0 5px;
+	width: 350px;
+}
+input#submit_new {
+	background: #ccc;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	color: #333;
+	height: 25px;
+	margin: 20px 0 0;
+	width: 130px;
+}
+input#submit_new:hover {
+	background: #ddd;
+}
+#cke_editor1, #cke_editor2 {
+	max-width: 1300px;
+}
+.mini_img {
+	border: 1px solid #666;
+}
+
 /* Leftside */
 aside {
 	background: #222;
 	float: left;
-	min-height: 600px;
+	min-height: 700px;
 	height: auto !important;
 	margin-bottom: -32000px;
 	padding-bottom: 32000px;
@@ -148,22 +264,32 @@ aside {
 	height: 100%;
 }
 aside h3 {
-	color: #bbb;
-	font: 19px Roboto, Tahoma, Arial, Verdana;
-	margin: 15px 0 0 15px;
+	border-bottom: 1px solid #fff;
+	color: #fb0;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+	text-transform: uppercase;
+	padding: 0 0 15px;
+	margin: 15px 15px 0 15px;
 }
 aside ul {
-	margin: 20px 0 0 15px;
+	margin: 5px 0 0;
 }
 aside ul li {
-	margin: 10px 0;
+	display: block;
+	margin: 1px 0;
+}
+aside li:hover {
+
 }
 aside li a {
 	color: #bbb;
+	display: block;
 	font: 16px Roboto, Tahoma, Arial, Verdana;
+	padding: 5px 0 5px 15px;
 	text-decoration: none;
 }
 aside li a:hover {
+	background: #373737;
 	color: #fff;
 }
 /* Footer */
@@ -172,7 +298,9 @@ footer {
 	color: #fff;
 	height: 40px;
 	margin: -40px auto 0;
+	position: relative;
 	width: 100%;
+	z-index: 2;
 }
 footer p {
 	font: 14px Roboto, Tahoma, Arial, Verdana;
