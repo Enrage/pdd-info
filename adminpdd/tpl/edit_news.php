@@ -1,4 +1,9 @@
 <h2 class="titles">Добавление авто новостей:</h2>
+<p><?php
+	if(isset($_SESSION['add_news']['res'])) {
+		echo $_SESSION['add_news']['res'];
+		unset($_SESSION['add_news']['res']);
+	} ?></p>
 <table class="news_title">
 	<tr><td colspan="3" class="add_new" height="40"><a href="?option=add_news">Добавить новость</a></td></tr>
 	<tr class="title_news_table">

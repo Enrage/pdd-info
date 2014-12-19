@@ -7,6 +7,6 @@ $res = $this->m->get_text_motonews($id_moto);
 	<article class="article">
 		<h3><?=$res['title']?></h3>
 		<p class="time_article"><?=$res['date']?></p>
-		<p class="text_article"><?=$res['text']?></p>
+		<?=$res['text']?>
 	</article>
 </section>

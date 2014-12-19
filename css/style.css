@@ -127,10 +127,10 @@ section > p > a {
 section > p > a:hover {
 	text-decoration: none;
 }
-.article {
+.article_desc {
 	background: #eff5ff;
 	border: 1px solid #ccc;
-	height: 200px;
+	height: 230px;
 	margin: 18px 0 0 20px;
 	width: 808px;
 }
@@ -138,7 +138,7 @@ h3 a {
 	color: #0070ff;
 	float: left;
 	font: 24px Roboto, Tahoma, Arial, Verdana;
-	margin: 30px 0 0 10px;
+	margin: 25px 0 0 15px;
 	text-decoration: none;
 }
 h3 a:hover {
@@ -148,6 +148,26 @@ h3 a:hover {
 	float: left;
 	margin: 30px 0 0 20px;
 }
+.img_article img {
+	border: 1px solid #999;
+}
+.img_article a {
+	margin-bottom: 5px;
+}
+section article {
+	position: relative;
+}
+.article {
+	position: relative;
+}
+.article h3 {
+	color: #0070ff;
+	font: 22px Roboto, Tahoma, Arial, Verdana;
+	text-align: center;
+}
+section article p.img_article + h3 + p.time_article + p {
+	margin: 65px 0 0 222px;
+}
 .text_article {
 	color: #333333;
 	float: left;
@@ -155,13 +175,22 @@ h3 a:hover {
 	margin: 5px 0 0 10px;
 	width: 580px;
 }
-.more, .time_article {
-	float: right;
-	margin: 15px 20px 0 0;
+.time_article {
+	position: absolute;
+	right: 30px;
+	top: 30px;
 }
 p.time_article {
 	color: #999;
 	font: 14px Roboto, Tahoma, Arial, Verdana;
+}
+.time_article + p {
+	margin: 30px 20px 20px;
+}
+.more {
+	bottom: 15px;
+	position: absolute;
+	right: 20px;
 }
 .more a {
 	color: #0070ff;
@@ -217,7 +246,10 @@ aside form {
 	text-align: center;
 }
 aside form input[type='text'] {
+	background: #fff;
 	border: 1px solid #999;
+	color: #333;
+	font: 14px Roboto, Tahoma, Arial, Verdana;
 	height: 20px;
 	padding: 1px 5px;
 	width: 120px;

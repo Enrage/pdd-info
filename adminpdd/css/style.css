@@ -102,17 +102,23 @@ h1 {
 /* Session result */
 .error {
 	color: #FF2828;
-	font: 14px Roboto, Tahoma, Arial, Verdana;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
 	text-align: center;
 }
 .error_add {
 	color: red;
-	font: 14px Roboto, Tahoma, Arial, Verdana;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+	margin: 10px 0 0;
 	text-align: left;
 }
 .success {
-	color: #33ee33;
-	font: 14px Roboto, Tahoma, Arial, Verdana;
+	background: #fff;
+	border: 1px solid #0b0;
+	color: #00aa00;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+	margin: 10px 0 0 20px;
+	padding: 4px 7px;
+	width: 280px;
 }
 
 /* Login */
@@ -143,6 +149,17 @@ input#subm {
 }
 
 /* Admin Panel*/
+.main_pic {
+	position: relative;
+	top: 20px;
+	left: -150px;
+}
+.container h4, .container h5 {
+	color: #0000aa;
+	margin-top: 12px;
+	margin-left: -200px;
+	text-align: center;
+}
 /* Edit news/motonews */
 .news_title {
 	background: #f5f5f5;

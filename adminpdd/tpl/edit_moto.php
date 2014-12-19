@@ -1,4 +1,9 @@
 <h2 class="titles">Добавление мото новостей:</h2>
+<p><?php
+	if(isset($_SESSION['add_moto']['res'])) {
+		echo $_SESSION['add_moto']['res'];
+		unset($_SESSION['add_moto']['res']);
+	} ?></p>
 <table class="news_title">
 	<tr><td colspan="3" class="add_new" height="40"><a href="?option=add_moto">Добавить мото новость</a></td></tr>
 	<tr class="title_news_table">
@@ -8,7 +13,7 @@
 	</tr>
 	<?php foreach ($content as $row): ?>
 	<tr>
-		<td><a href="update_moto&amp;id_moto=<?=$row['id_moto']?>"><?=$row['title']?></a></td>
+		<td><a href="?option=update_moto&amp;id_moto=<?=$row['id_moto']?>"><?=$row['title']?></a></td>
 		<td class="td_date"><?=$row['date']?></td>
 		<td class="del_news"><a href="?option=delete_moto&amp;id_moto=<?=$row['id_moto']?>">Del&nbsp;<img src="img/del.png" width="12" alt="delete"></a></td>
 	</tr>
