@@ -330,7 +330,7 @@ class admin_model {
 			if(isset($_GET['id_moto'])) $id_moto = (int)($_GET['id_moto']);
 			$query = "DELETE FROM moto_news WHERE id_moto = ?";
 			if(!$stmt = $this->mysqli->prepare($query)) {
-				throw new Exception("Error prepare delete_news");
+				throw new Exception("Error prepare delete_moto");
 			}
 			$stmt->bind_param('i', $id_moto);
 			$stmt->execute();
@@ -341,6 +341,133 @@ class admin_model {
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 			die();
+		}
+	}
+	// Добавление ПДД
+	public function add_pdd() {
+		if($_POST) {
+			$name_pdd = $_POST['name_pdd'];
+			$text_pdd = $_POST['text_pdd'];
+			if(empty($name_pdd) || empty($text_pdd)) {
+				$_SESSION['add_pdd']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
+				$_SESSION['add_pdd']['name_pdd'] = $name_pdd;
+				$_SESSION['add_pdd']['text_pdd'] = $text_pdd;
+				return false;
+			}
+			try {
+				$query = "INSERT INTO pdd (name_pdd, text_pdd) VALUES (?, ?)";
+				if(!$stmt = $this->mysqli->prepare($query)) {
+					throw new Exception("Error prepare add_pdd");
+				}
+				$stmt->bind_param('ss', $name_pdd, $text_pdd);
+				$stmt->execute();
+				$stmt->close();
+				$_SESSION['add_pdd']['res'] = '<p class="success">Правило успешно добавлено!</p>';
+				header("Location: {$_SERVER['PHP_SELF']}?option=edit_pdd");
+				die();
+			} catch(Exception $e) {
+				print 'Ошибка: '.$e->getMessage();
+				die();
+			}
+		}
+	}
+	// Получение текста ПДД
+	public function get_text_pdd($id_pdd) {
+		try {
+			if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
+			$query = "SELECT * FROM pdd WHERE id_pdd = ?";
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
+				throw new Exception("Error prepare get_text_pdd");
+			} else {
+				$stmt->bind_param('i', $id_pdd);
+				$stmt->execute();
+				$res = $stmt->get_result();
+				$row = $res->fetch_array(MYSQLI_ASSOC);
+				return $row;
+				$stmt->close();
+			}
+		} catch(Exception $e) {
+			print 'Ошибка: '.$e->getMessage();
+			die();
+		}
+	}
+	// Редактирование ПДД
+	public function update_pdd() {
+		if($_POST) {
+			$id_pdd = (int)$_POST['id_pdd'];
+			$name_pdd = $_POST['name_pdd'];
+			$text_pdd = $_POST['text_pdd'];
+			if(empty($name_pdd) || empty($text_pdd)) {
+				$_SESSION['add_pdd']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
+				return false;
+			}
+			try {
+				$query = "UPDATE pdd SET name_pdd = ?, text_pdd = ? WHERE id_pdd = ?";
+				if(!$stmt = $this->mysqli->prepare($query)) {
+					throw new Exception("Error prepare update_pdd");
+				}
+				$stmt->bind_param('ssi', $name_pdd, $text_pdd, $id_pdd);
+				$stmt->execute();
+				$stmt->close();
+				$_SESSION['add_pdd']['res'] = '<p class="success">Правило успешно обновлено!</p>';
+				header("Location: {$_SERVER['PHP_SELF']}?option=edit_pdd");
+				die();
+			} catch(Exception $e) {
+				print 'Ошибка: '.$e->getMessage();
+				die();
+			}
+		}
+	}
+	// Удаление ПДД
+	public function delete_pdd() {
+		try {
+			if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
+			$query = "DELETE FROM pdd WHERE id_pdd = ?";
+			if(!$stmt = $this->mysqli->prepare($query)) {
+				throw new Exception("Error prepare delete_pdd");
+			}
+			$stmt->bind_param('i', $id_pdd);
+			$stmt->execute();
+			$stmt->close();
+			$_SESSION['add_pdd']['res'] = '<p class="success">Правило успешно удалено!</p>';
+			header("Location: {$_SERVER['PHP_SELF']}?option=edit_pdd");
+			die();
+		} catch(Exception $e) {
+			print 'Ошибка: '.$e->getMessage();
+			die();
+		}
+	}
+	// Добавление пункта меню
+	public function add_menu() {
+		if($_POST) {
+			$name_menu = $_POST['name_menu'];
+			$text_menu = $_POST['text_menu'];
+			$meta_key = $_POST['meta_key'];
+			$meta_desc = $_POST['meta_desc'];
+			if(empty($name_menu) || empty($text_menu)) {
+				$_SESSION['add_menu']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
+				$_SESSION['add_menu']['name_menu'] = $name_menu;
+				$_SESSION['add_menu']['text_menu'] = $text_menu;
+				$_SESSION['add_menu']['meta_key'] = $meta_key;
+				$_SESSION['add_menu']['meta_desc'] = $meta_desc;
+				return false;
+			}
+			try {
+				$query = "INSERT INTO menu (name_menu, text_menu, meta_key, meta_desc) VALUES (?, ?, ?, ?)";
+				if(!$stmt = $this->mysqli->prepare($query)) {
+					throw new Exception("Error prepare add_menu");
+				}
+				$stmt->bind_param('ssss', $name_menu, $text_menu, $meta_key, $meta_desc);
+				$stmt->execute();
+				$stmt->close();
+				$_SESSION['add_menu']['res'] = '<p class="success">Пункт меню успешно добавлен!</p>';
+				header("Location: {$_SERVER['PHP_SELF']}?option=edit_menu");
+				die();
+			} catch(Exception $e) {
+				print 'Ошибка: '.$e->getMessage();
+				die();
+			}
 		}
 	}
 }

@@ -30,8 +30,8 @@ isset($_SESSION['add_moto']['meta_desc']) ? $meta_desc = $_SESSION['add_moto']['
 		<p>Meta ключевые слова:<br>
 		<input type="text" name="meta_key" id="keywords_news" value="<?=$meta_key?>"></p>
 		<p>Meta описание:<br>
-		<input type="text" name="meta_desc" id="description_news"></p>
-		<p><input type="submit" value="Добавить" name="submit" id="submit_new" value="<?=$meta_desc?>"></p>
+		<input type="text" name="meta_desc" id="description_news" value="<?=$meta_desc?>"></p>
+		<p><input type="submit" value="Добавить" name="submit" id="submit_new"></p>
 	</form>
 	<?php unset($_SESSION['add_moto']); ?>
 </section>

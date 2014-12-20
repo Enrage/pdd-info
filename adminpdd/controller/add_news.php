@@ -6,3 +6,5 @@ class add_news extends Core_Admin {
 	}
 }
 ?>
+
+
