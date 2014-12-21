@@ -134,6 +134,12 @@ section > p > a:hover {
 	margin: 18px 0 0 20px;
 	width: 808px;
 }
+.article_desc h3 {
+	color: #0070ff;
+	font: 20px Roboto, Tahoma, Arial, Verdana;
+	margin: 10px 0;
+	text-align: center;
+}
 h3 a {
 	color: #0070ff;
 	float: left;

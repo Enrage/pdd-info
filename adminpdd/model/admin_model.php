@@ -470,5 +470,74 @@ class admin_model {
 			}
 		}
 	}
+	// Получение текста меню
+	public function get_text_menu($id_menu) {
+		try {
+			if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
+			$query = "SELECT * FROM menu WHERE id_menu = ?";
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
+				throw new Exception("Error prepare get_text_menu");
+			} else {
+				$stmt->bind_param('i', $id_menu);
+				$stmt->execute();
+				$res = $stmt->get_result();
+				$row = $res->fetch_array(MYSQLI_ASSOC);
+				return $row;
+				$stmt->close();
+			}
+		} catch(Exception $e) {
+			print 'Ошибка: '.$e->getMessage();
+			die();
+		}
+	}
+	// Редактирование пункта меню
+	public function update_menu() {
+		if($_POST) {
+			$id_menu = (int)$_POST['id_menu'];
+			$name_menu = $_POST['name_menu'];
+			$text_menu = $_POST['text_menu'];
+			$meta_key = $_POST['meta_key'];
+			$meta_desc = $_POST['meta_desc'];
+			if(empty($name_menu) || empty($text_menu)) {
+				$_SESSION['add_menu']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
+				return false;
+			}
+			try {
+				$query = "UPDATE pdd SET name_menu = ?, text_menu = ?, meta_key = ?, meta_desc = ? WHERE id_menu = ?";
+				if(!$stmt = $this->mysqli->prepare($query)) {
+					throw new Exception("Error prepare update_pdd");
+				}
+				$stmt->bind_param('ssi', $name_menu, $text_menu, $meta_key, $meta_desc, $id_menu);
+				$stmt->execute();
+				$stmt->close();
+				$_SESSION['add_menu']['res'] = '<p class="success">Пункт меню успешно обновлён!</p>';
+				header("Location: {$_SERVER['PHP_SELF']}?option=edit_menu");
+				die();
+			} catch(Exception $e) {
+				print 'Ошибка: '.$e->getMessage();
+				die();
+			}
+		}
+	}
+	// Удаление пункта меню
+	public function delete_menu() {
+		try {
+			if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
+			$query = "DELETE FROM menu WHERE id_menu = ?";
+			if(!$stmt = $this->mysqli->prepare($query)) {
+				throw new Exception("Error prepare delete_menu");
+			}
+			$stmt->bind_param('i', $id_menu);
+			$stmt->execute();
+			$stmt->close();
+			$_SESSION['add_menu']['res'] = '<p class="success">Пункт меню успешно удалён!</p>';
+			header("Location: {$_SERVER['PHP_SELF']}?option=edit_menu");
+			die();
+		} catch(Exception $e) {
+			print 'Ошибка: '.$e->getMessage();
+			die();
+		}
+	}
 }
 ?>
