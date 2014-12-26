@@ -12,8 +12,9 @@
 <body>
 <div id="wrapper">
 	<header>
-		<p class="name_admin">Админ: &nbsp;<span><?=$_SESSION['auth']['admin']?></span></p>
+		<p class="name_admin">Администратор: &nbsp;<span><?=$_SESSION['auth']['admin']?></span></p>
 		<h1>Admin Panel PDD-INFO</h1>
+		<p class="site"><a href="../" target="_blank">Перейти на сайт</a></p>
 		<p class="exit"><a href="?option=logout">Выйти</a></p>
 	</header>
 	<div id="main">

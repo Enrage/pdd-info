@@ -43,7 +43,6 @@ header p a img {
 	top: 7px;
 	left: 10px;
 }
-
 /* Navigation */
 nav.top_menu {
 	display: table-row;
@@ -144,7 +143,7 @@ h3 a {
 	color: #0070ff;
 	float: left;
 	font: 24px Roboto, Tahoma, Arial, Verdana;
-	margin: 25px 0 0 15px;
+	margin: 15px 0 0 15px;
 	text-decoration: none;
 }
 h3 a:hover {
@@ -204,6 +203,36 @@ p.time_article {
 }
 .more a:hover {
 	text-decoration: none;
+}
+.text_menu {
+	color: #333333;
+	float: left;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+	margin: 15px 0 30px 20px;
+	width: 580px;
+}
+.pagination {
+	margin: 30px 0;
+	text-align: center;
+}
+.pagination a {
+	background: #bdf;
+	border: 1px solid #666;
+	color: #000;
+	font: 15px Roboto, Tahoma, Arial, Verdana;
+	margin: 0 5px;
+	padding: 2px 8px;
+	text-decoration: none;
+}
+.pagination a:hover {
+	background: #efc;
+}
+.pagination span {
+	background: #efc;
+	border: 1px solid #666;
+	font: 15px Roboto, Tahoma, Arial, Verdana;
+	margin: 0 5px;
+	padding: 2px 8px;
 }
 
 /*PDD Bilet*/

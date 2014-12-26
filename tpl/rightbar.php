@@ -1,8 +1,9 @@
 	</div>
 		<aside>
-			<form action="" method="post">
+			<form action="" method="get">
+				<input type="hidden" name="option" value="search">
 				<p><input type="text" name="search" placeholder="Что искать"></p>
-				<p><input type="submit" value="Найти" name="submit"></p>
+				<p><input type="submit" value="Найти"></p>
 			</form>
 			<p class="bilet_pdd">ПДД<br>билеты</p>
 			<ul>

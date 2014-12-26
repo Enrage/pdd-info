@@ -11,88 +11,55 @@ class admin_model {
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
 	}
+	private function sql_edit($query) {
+		$stmt = $this->mysqli->stmt_init();
+		$stmt->prepare($query);
+		$stmt->execute();
+		$res = $stmt->get_result();
+		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
+			$rows[] = $row;
+		}
+		return $rows;
+		$stmt->close();
+	}
 	// Вывод авто новостей
 	public function edit_news() {
 		try {
-			$query = "SELECT id_news, title, date FROM news";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
-				throw new Exception("Error prepare edit_news");
-			} else {
-				$stmt->execute();
-				$res = $stmt->get_result();
-				while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-					$rows[] = $row;
-				}
-				return $rows;
-				$stmt->close();
-			}
+			$edit = self::sql_edit("SELECT id_news, title, date FROM news");
+			if(!$edit) throw new Exception("Error prepare edit_news");
+			return $edit;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
-			die();
 		}
 	}
 	// Вывод мото новостей
 	public function edit_moto() {
 		try {
-			$query = "SELECT id_moto, title, date FROM moto_news";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
-				throw new Exception("Error prepare edit_moto");
-			} else {
-				$stmt->execute();
-				$res = $stmt->get_result();
-				while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-					$rows[] = $row;
-				}
-				return $rows;
-				$stmt->close();
-			}
+			$edit = self::sql_edit("SELECT id_moto, title, date FROM moto_news");
+			if(!$edit) throw new Exception("Error prepare edit_moto");
+			return $edit;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
-			die();
 		}
 	}
 	// Вывод пдд
 	public function edit_pdd() {
 		try {
-			$query = "SELECT id_pdd, name_pdd FROM pdd";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
-				throw new Exception("Error prepare edit_pdd");
-			} else {
-				$stmt->execute();
-				$res = $stmt->get_result();
-				while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-					$rows[] = $row;
-				}
-				return $rows;
-				$stmt->close();
-			}
+			$edit = self::sql_edit("SELECT id_pdd, name_pdd FROM pdd");
+			if(!$edit) throw new Exception("Error prepare edit_pdd");
+			return $edit;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
-			die();
 		}
 	}
 	// Вывод пунктов меню
 	public function edit_menu() {
 		try {
-			$query = "SELECT id_menu, name_menu FROM menu";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
-				throw new Exception("Error prepare edit_menu");
-			} else {
-				$stmt->execute();
-				$res = $stmt->get_result();
-				while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-					$rows[] = $row;
-				}
-				return $rows;
-				$stmt->close();
-			}
+			$edit = self::sql_edit("SELECT id_menu, name_menu FROM menu");
+			if(!$edit) throw new Exception("Error prepare edit_menu");
+			return $edit;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
-			die();
 		}
 	}
 	// Добавление авто новостей
@@ -504,11 +471,11 @@ class admin_model {
 				return false;
 			}
 			try {
-				$query = "UPDATE pdd SET name_menu = ?, text_menu = ?, meta_key = ?, meta_desc = ? WHERE id_menu = ?";
+				$query = "UPDATE menu SET name_menu = ?, text_menu = ?, meta_key = ?, meta_desc = ? WHERE id_menu = ?";
 				if(!$stmt = $this->mysqli->prepare($query)) {
-					throw new Exception("Error prepare update_pdd");
+					throw new Exception("Error prepare update_menu");
 				}
-				$stmt->bind_param('ssi', $name_menu, $text_menu, $meta_key, $meta_desc, $id_menu);
+				$stmt->bind_param('ssssi', $name_menu, $text_menu, $meta_key, $meta_desc, $id_menu);
 				$stmt->execute();
 				$stmt->close();
 				$_SESSION['add_menu']['res'] = '<p class="success">Пункт меню успешно обновлён!</p>';

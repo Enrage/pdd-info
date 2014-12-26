@@ -5,4 +5,5 @@ define("PASS", "12345");
 define("DB", "pdd-info");
 define("ADMIN_URL", $_SERVER['DOCUMENT_ROOT'].'/pdd/adminpdd/');
 define('PATH', 'http://localhost/pdd/');
+define('QUANTITY_NEWS', 4);
 ?>

@@ -16,6 +16,12 @@
 	font-weight: 700;
 	src: local('Roboto Bold'), local('Roboto-Bold'), url(../../fonts/Roboto-Bold.woff) format('woff');
 }
+@font-face {
+	font-family: 'Consol';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Consolas'), url(../../fonts/Consolas.ttf) format('ttf');
+}
 article, aside, details, footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -26,7 +32,7 @@ html {
 	height: 100%;
 }
 body {
-	background: #bbb;
+	background: #fff;
 	height: 100%;
 }
 .clr {
@@ -40,7 +46,7 @@ header {
 }
 h1 {
 	color: #88ffff;
-	font: 20px Roboto, Tahoma, Arial, Verdana;
+	font: 23px Consol, Roboto, Tahoma, Arial, Verdana;
 	padding: 10px 0 0;
 	text-align: center;
 }
@@ -53,6 +59,19 @@ h1 {
 .name_admin span {
 	color: #fff;
 	font: bold 16px Roboto, Tahoma, Arial, Verdana;
+}
+.site {
+	position: absolute;
+	right: 200px;
+	top: 0;
+	padding: 13px 0 0;
+}
+.site a {
+	color: #fb0;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
+}
+.site a:hover {
+	text-decoration: none;
 }
 .exit {
 	position: absolute;
