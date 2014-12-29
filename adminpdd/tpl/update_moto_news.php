@@ -1,18 +1,18 @@
 <?php
-if(isset($_GET['id_moto'])) $id_moto = (int)($_GET['id_moto']);
-$res = $this->m->get_text_motonews($id_moto);
+if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
+$res = $this->m->get_text_moto_news($id_news);
 ?>
 <section>
 	<h2>Редактирование мото новости:</h2>
 	<p><?php
-	if(isset($_SESSION['add_moto']['res'])) {
-		echo $_SESSION['add_moto']['res'];
-		unset($_SESSION['add_moto']['res']);
+	if(isset($_SESSION['add_moto_news']['res'])) {
+		echo $_SESSION['add_moto_news']['res'];
+		unset($_SESSION['add_moto_news']['res']);
 	} ?></p>
 	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<p>Заголовок мото новости:<br>
 		<input type="text" name="title" id="title_news" value="<?=$res['title']?>"></p>
-		<input type="hidden" name="id_moto" value="<?=$res['id_moto']?>">
+		<input type="hidden" name="id_news" value="<?=$res['id_news']?>">
 		<p>Изображение:<br>
 		<input type="file" name="img_src"><img class="mini_img" src="../<?=$res['img_src']?>" alt="Image" width="250"></p>
 		<p>Краткое описание мото новости:<br>

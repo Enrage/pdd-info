@@ -1,13 +1,13 @@
 <?php
 if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-$res = $this->m->get_text_news($id_news);
+$res = $this->m->get_text_auto_news($id_news);
 ?>
 <section>
-	<h2>Редактирование новости:</h2>
+	<h2>Редактирование авто новости:</h2>
 	<p><?php
-	if(isset($_SESSION['add_news']['res'])) {
-		echo $_SESSION['add_news']['res'];
-		unset($_SESSION['add_news']['res']);
+	if(isset($_SESSION['add_auto_news']['res'])) {
+		echo $_SESSION['add_auto_news']['res'];
+		unset($_SESSION['add_auto_news']['res']);
 	} ?></p>
 	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<p>Заголовок новости:<br>

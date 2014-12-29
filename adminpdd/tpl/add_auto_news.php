@@ -1,20 +1,25 @@
 <?php
-isset($_SESSION['add_news']['title']) ? $title = $_SESSION['add_news']['title'] : $title = NULL;
-isset($_SESSION['add_news']['description']) ? $description = $_SESSION['add_news']['description'] : $description = NULL;
-isset($_SESSION['add_news']['text']) ? $text = $_SESSION['add_news']['text'] : $text = NULL;
-isset($_SESSION['add_news']['meta_key']) ? $meta_key = $_SESSION['add_news']['meta_key'] : $meta_key = NULL;
-isset($_SESSION['add_news']['meta_desc']) ? $meta_desc = $_SESSION['add_news']['meta_desc'] : $meta_desc = NULL;
+isset($_SESSION['add_auto_news']['title']) ? $title = $_SESSION['add_auto_news']['title'] : $title = NULL;
+isset($_SESSION['add_auto_news']['description']) ? $description = $_SESSION['add_auto_news']['description'] : $description = NULL;
+isset($_SESSION['add_auto_news']['text']) ? $text = $_SESSION['add_auto_news']['text'] : $text = NULL;
+isset($_SESSION['add_auto_news']['meta_key']) ? $meta_key = $_SESSION['add_auto_news']['meta_key'] : $meta_key = NULL;
+isset($_SESSION['add_auto_news']['meta_desc']) ? $meta_desc = $_SESSION['add_auto_news']['meta_desc'] : $meta_desc = NULL;
 ?>
 <section>
 	<h2>Добавление новой новости:</h2>
 	<p><?php
-	if(isset($_SESSION['add_news']['res'])) {
-		echo $_SESSION['add_news']['res'];
-		unset($_SESSION['add_news']['res']);
+	if(isset($_SESSION['add_auto_news']['res'])) {
+		echo $_SESSION['add_auto_news']['res'];
+		unset($_SESSION['add_auto_news']['res']);
 	} ?></p>
 	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<p>Заголовок новости:<br>
 		<input type="text" name="title" id="title_news" value="<?=$title?>"></p>
+		<p>Категория
+		<select name="cat" class="cat_news">
+			<option value="auto">Авто</option>
+			<option value="moto">Мото</option>
+		</select></p>
 		<p>Изображение:<br>
 		<input type="file" name="img_src"></p>
 		<p>Краткое описание новости:<br>
@@ -33,5 +38,5 @@ isset($_SESSION['add_news']['meta_desc']) ? $meta_desc = $_SESSION['add_news']['
 		<input type="text" name="meta_desc" id="description_news" value="<?=$meta_desc?>"></p>
 		<p><input type="submit" value="Добавить" name="submit" id="submit_new"></p>
 	</form>
-	<?php unset($_SESSION['add_news']); ?>
+	<?php unset($_SESSION['add_auto_news']); ?>
 </section>

@@ -67,7 +67,7 @@ class model {
 		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 			$rows[] = $row;
 		}
-		return $rows;
+		if(isset($rows)) return $rows;
 		$stmt->close();
 	}
 	// Top Menu
@@ -106,7 +106,7 @@ class model {
 		$cat = 'auto';
 		$cat = htmlspecialchars(trim(stripslashes($cat)));
 		$to = $this->to();
-		$query = "SELECT id_news, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
+		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
 		else {
@@ -116,7 +116,7 @@ class model {
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 				$rows[] = $row;
 			}
-			return $rows;
+			if(isset($rows)) return $rows;
 			$stmt->close();
 		}
 	}
@@ -129,6 +129,7 @@ class model {
 	// Получение текста авто новостей
 	public function get_text_auto_news($id_news) {
 		if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
+
 		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE cat = 'auto' AND id_news = ?";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
@@ -146,7 +147,7 @@ class model {
 		$cat = 'moto';
 		$cat = htmlspecialchars(trim(stripslashes($cat)));
 		$to = $this->to();
-		$query = "SELECT id_news, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
+		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
 		else {
@@ -156,7 +157,7 @@ class model {
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 				$rows[] = $row;
 			}
-			return $rows;
+			if(isset($rows)) return $rows;
 			$stmt->close();
 		}
 	}
@@ -199,34 +200,49 @@ class model {
 		return $count_pages;
 	}
 	// Поиск
-/*	public function search() {
+	public function search() {
+		$rows = "";
+		$search = "";
 		$to = $this->to();
-		if(isset($_GET['search'])) $search = "%{$_GET['search']}%";
+		if(empty($_GET['search'])) {
+				$_SESSION['res'] = "Поле поиск должно быть заполнено!";
+				return false;
+		} elseif(isset($_GET['search'])) {
+			$search = "\%{$_GET['search']}\%";
+			if(mb_strlen($search) < 9) {
+				$_SESSION['res'] = "Слишком короткий поисковый запрос!";
+				return false;
+			}
+		}
 		$search = htmlspecialchars(trim(stripslashes($search)));
-		$query = "SELECT * FROM news WHERE title LIKE ? UNION SELECT * FROM moto_news WHERE title LIKE ? ORDER BY date DESC LIMIT {$to}, {$this->limit}";
+		$query = "SELECT * FROM news WHERE title LIKE ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса search";
 		else {
-			$stmt->bind_param('ss', $search, $search);
+			$stmt->bind_param('s', $search);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			if($res->num_rows == 0) {
+				$_SESSION['res'] = "По вашему запросу ничего не найдено!";
+				return false;
+			}
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$rows[] = $row;
+				$rows[] = $row;
 			}
 			return $rows;
 			$stmt->close();
 		}
 	}
-	public function count_search() {
+	public function count_search_news() {
 		if(isset($_GET['search'])) $search = "%{$_GET['search']}%";
 		$search = htmlspecialchars(trim(stripslashes($search)));
-		$count_search = $this->mysqli->query("SELECT * FROM news WHERE title LIKE '%$search%' UNION SELECT * FROM moto_news WHERE title LIKE '%$search%'");
+		$count_search = $this->mysqli->query("SELECT * FROM news WHERE title LIKE '%$search%'");
 		$count_search = $count_search->num_rows;
 		return $count_search;
 	}
 	public function count_pages_search() {
 		$count_pages = ceil($this->count_search() / $this->limit);
 		return $count_pages;
-	} */
+	}
 }
 ?>

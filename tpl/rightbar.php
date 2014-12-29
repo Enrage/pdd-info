@@ -1,3 +1,4 @@
+<?php $this->m->search(); ?>
 	</div>
 		<aside>
 			<form action="" method="get">

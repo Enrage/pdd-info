@@ -1,7 +1,4 @@
-<?php
-if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
-$res = $this->m->get_text_auto_news($id_news);
-?>
+<?php $res = view::get_content(); ?>
 <section>
 	<p><a href="index.php">Главная</a> --> Новости --> Статья</p>
 	<article class="article">

@@ -1,16 +1,16 @@
 <?php
-isset($_SESSION['add_moto']['title']) ? $title = $_SESSION['add_moto']['title'] : $title = NULL;
-isset($_SESSION['add_moto']['description']) ? $description = $_SESSION['add_moto']['description'] : $description = NULL;
-isset($_SESSION['add_moto']['text']) ? $text = $_SESSION['add_moto']['text'] : $text = NULL;
-isset($_SESSION['add_moto']['meta_key']) ? $meta_key = $_SESSION['add_moto']['meta_key'] : $meta_key = NULL;
-isset($_SESSION['add_moto']['meta_desc']) ? $meta_desc = $_SESSION['add_moto']['meta_desc'] : $meta_desc = NULL;
+isset($_SESSION['add_moto_news']['title']) ? $title = $_SESSION['add_moto_news']['title'] : $title = NULL;
+isset($_SESSION['add_moto_news']['description']) ? $description = $_SESSION['add_moto_news']['description'] : $description = NULL;
+isset($_SESSION['add_moto_news']['text']) ? $text = $_SESSION['add_moto_news']['text'] : $text = NULL;
+isset($_SESSION['add_moto_news']['meta_key']) ? $meta_key = $_SESSION['add_moto_news']['meta_key'] : $meta_key = NULL;
+isset($_SESSION['add_moto_news']['meta_desc']) ? $meta_desc = $_SESSION['add_moto_news']['meta_desc'] : $meta_desc = NULL;
 ?>
 <section>
 	<h2>Добавление новой мото новости:</h2>
 	<p><?php
-	if(isset($_SESSION['add_moto']['res'])) {
-		echo $_SESSION['add_moto']['res'];
-		unset($_SESSION['add_moto']['res']);
+	if(isset($_SESSION['add_moto_news']['res'])) {
+		echo $_SESSION['add_moto_news']['res'];
+		unset($_SESSION['add_moto_news']['res']);
 	} ?></p>
 	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<p>Заголовок мото новости:<br>
@@ -33,5 +33,5 @@ isset($_SESSION['add_moto']['meta_desc']) ? $meta_desc = $_SESSION['add_moto']['
 		<input type="text" name="meta_desc" id="description_news" value="<?=$meta_desc?>"></p>
 		<p><input type="submit" value="Добавить" name="submit" id="submit_new"></p>
 	</form>
-	<?php unset($_SESSION['add_moto']); ?>
+	<?php unset($_SESSION['add_moto_news']); ?>
 </section>

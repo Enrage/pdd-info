@@ -259,6 +259,9 @@ section h2, .container h2 {
 h2.titles {
 	padding: 15px 0 0 35px;
 }
+.cat_news option {
+	width: 60px;
+}
 input#title_news, input#keywords_news, input#description_news {
 	background: #fff;
 	color: #333;
@@ -286,7 +289,6 @@ input#submit_new:hover {
 .mini_img {
 	border: 1px solid #666;
 }
-
 /* Leftside */
 aside {
 	background: #222;
