@@ -1,18 +1,11 @@
-<?php
-$count_auto_news = $this->m->count_auto_news();
-$page = $this->m->page();
-$count_pages_auto_news = ceil($count_auto_news / $this->m->limit);
-if(isset($_GET['page'])) {
-	$page = (int)$_GET['page'];
-	if($page > $count_pages_auto_news) $_SESSION['res'] = "Такой страницы не существует!";
-}?>
+<?php $res = main::get_auto_param();?>
 <section>
 <p><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];
 		unset($_SESSION['res']);
 	}?></p>
-	<?php if(!empty($content)): ?>
-	<?php foreach ($content as $row): ?>
+	<?php if(!empty($content)):
+	foreach ($content as $row):?>
 	<article class="article_desc">
 		<p class="img_article"><a href="?option=view&amp;cat=<?=$row['cat']?>&amp;id_news=<?=$row['id_news']?>"><img src="<?=$row['img_src']?>" width="184" alt="News"></a></p>
 		<h3><a href="?option=view&amp;cat=<?=$row['cat']?>&amp;id_news=<?=$row['id_news']?>"><?=$row['title']?></a></h3>
@@ -20,7 +13,7 @@ if(isset($_GET['page'])) {
 		<?=$row['description']?>
 		<p class="more"><a href="?option=view&amp;cat=<?=$row['cat']?>&amp;id_news=<?=$row['id_news']?>">Подробнее..</a></p>
 	</article>
-	<?php endforeach; ?>
-	<div class="pagination"><?php print $this->m->page_nav($page, $count_auto_news); ?></div>
-	<?php endif; ?>
+	<?php endforeach;?>
+	<div class="pagination"><?php print $this->m->page_nav($res[0], $res[1]); ?></div>
+	<?php endif;?>
 </section>

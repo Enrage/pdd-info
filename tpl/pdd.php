@@ -1,11 +1,4 @@
-<?php
-$count_pdd = $this->m->count_pdd();
-$page = $this->m->page();
-$count_pages_pdd = ceil($count_pdd / $this->m->limit);
-if(isset($_GET['page'])) {
-	$page = (int)$_GET['page'];
-	if($page > $count_pages_pdd) $_SESSION['res'] = "Такой страницы не существует!";
-}?>
+<?php $res = pdd::get_pdd_param();?>
 <section>
 <p><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];
@@ -18,6 +11,6 @@ if(isset($_GET['page'])) {
 		<?=$row['text_pdd']?>
 	</article>
 	<?php endforeach; ?>
-	<div class="pagination"><?php print $this->m->page_nav($page, $count_pdd); ?></div>
+	<div class="pagination"><?php print $this->m->page_nav($res[0], $res[1]); ?></div>
 	<?php endif; ?>
 </section>

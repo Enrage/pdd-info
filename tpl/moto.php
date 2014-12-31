@@ -1,11 +1,4 @@
-<?php
-$count_moto_news = $this->m->count_moto_news();
-$page = $this->m->page();
-$count_pages_moto_news = ceil($count_moto_news / $this->m->limit);
-if(isset($_GET['page'])) {
-	$page = (int)$_GET['page'];
-	if($page > $count_pages_moto_news) $_SESSION['res'] = "Такой страницы не существует!";
-}?>
+<?php $res = moto::get_moto_param();?>
 <section>
 <p><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];
@@ -21,6 +14,6 @@ if(isset($_GET['page'])) {
 		<p class="more"><a href="?option=view&amp;cat=<?=$row['cat']?>&amp;id_news=<?=$row['id_news']?>">Подробнее..</a></p>
 	</article>
 	<?php endforeach; ?>
-	<div class="pagination"><?php print $this->m->page_nav($page, $count_moto_news); ?></div>
+	<div class="pagination"><?php print $this->m->page_nav($res[0], $res[1]); ?></div>
 	<?php endif; ?>
 </section>

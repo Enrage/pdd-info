@@ -13,17 +13,14 @@ class model {
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
 	}
-	private function toInt($int) {
-		$int = abs((int)$int);
-		return $int;
-	}
 	public function page() {
 		$page = 1;
 		if(isset($_GET['page'])) {
-			$page_num = $this->toInt($_GET['page']);
+			$page_num = (int)($_GET['page']);
 			if($page_num > 0) {
 				$page = $page_num;
-			} else $page = 1;
+			}
+			else return false;
 		}
 		return $page;
 	}
@@ -61,7 +58,7 @@ class model {
 	// SQL Запрос
 	private function sql_edit($query) {
 		$stmt = $this->mysqli->stmt_init();
-		$stmt->prepare($query);
+		if(!$stmt->prepare($query)) return false;
 		$stmt->execute();
 		$res = $stmt->get_result();
 		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
@@ -108,7 +105,7 @@ class model {
 		$to = $this->to();
 		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		if(!$stmt->prepare($query)) return false;
 		else {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
@@ -129,7 +126,6 @@ class model {
 	// Получение текста авто новостей
 	public function get_text_auto_news($id_news) {
 		if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
-
 		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE cat = 'auto' AND id_news = ?";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
@@ -149,7 +145,7 @@ class model {
 		$to = $this->to();
 		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		if(!$stmt->prepare($query)) return false;
 		else {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
@@ -194,11 +190,6 @@ class model {
 		$count_pdd = $count_pdd->num_rows;
 		return $count_pdd;
 	}
-	// Количество страниц ПДД
-	public function count_pages_pdd() {
-		$count_pages = ceil($this->count_pdd() / $this->limit);
-		return $count_pages;
-	}
 	// Поиск
 	public function search() {
 		$rows = "";
@@ -217,7 +208,7 @@ class model {
 		$search = htmlspecialchars(trim(stripslashes($search)));
 		$query = "SELECT * FROM news WHERE title LIKE ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса search";
+		if(!$stmt->prepare($query)) return false;
 		else {
 			$stmt->bind_param('s', $search);
 			$stmt->execute();
@@ -239,10 +230,6 @@ class model {
 		$count_search = $this->mysqli->query("SELECT * FROM news WHERE title LIKE '%$search%'");
 		$count_search = $count_search->num_rows;
 		return $count_search;
-	}
-	public function count_pages_search() {
-		$count_pages = ceil($this->count_search() / $this->limit);
-		return $count_pages;
 	}
 }
 ?>

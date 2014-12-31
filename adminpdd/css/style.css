@@ -160,6 +160,12 @@ h1 {
 	position: relative;
 	top: 200px;
 }
+.form_login h2 {
+	color: #333;
+	font: 18px Roboto, Tahoma, Arial, Verdana;
+	margin: 0 0 15px;
+	text-align: center;
+}
 #login p {
 	margin: 5px;
 }

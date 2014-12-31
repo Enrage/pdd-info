@@ -48,6 +48,7 @@ if($_POST) {
 <body>
 <div class="main">
 	<div class="form_login">
+	<h2>Administration Panel PDD-INFO</h2>
 	<p><?php
 	if(isset($_SESSION['res'])) {
 		echo $_SESSION['res'];

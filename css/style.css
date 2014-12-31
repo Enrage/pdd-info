@@ -76,6 +76,10 @@ nav.top_menu ul li a {
 	text-decoration: none;
 	display: table-cell;
 	vertical-align: middle;
+	-webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
 }
 nav.top_menu ul li a:hover {
 	background: #c8e0ea;
@@ -116,7 +120,6 @@ nav.top_menu ul li:first-child a {
 	margin: 20px auto 30px;
 }
 section p {
-	margin: 0 0 0 20px;
 	color: #333;
 	font: 14px Roboto, Tahoma, Arial, Verdana;
 }
