@@ -13,6 +13,11 @@ class model {
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
 	}
+	private function clr($x) {
+		if(get_magic_quotes_gpc()) $x = stripslashes($x);
+		$x = trim($this->mysqli->real_escape_string(strip_tags(htmlspecialchars($x))));
+		return $x;
+	}
 	public function page() {
 		$page = 1;
 		if(isset($_GET['page'])) {
@@ -61,11 +66,11 @@ class model {
 		if(!$stmt->prepare($query)) return false;
 		$stmt->execute();
 		$res = $stmt->get_result();
+		$stmt->close();
 		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 			$rows[] = $row;
 		}
 		if(isset($rows)) return $rows;
-		$stmt->close();
 	}
 	// Top Menu
 	public function get_top_menu() {
@@ -86,9 +91,9 @@ class model {
 					$stmt->bind_param('i', $id_menu);
 					$stmt->execute();
 					$res = $stmt->get_result();
+					$stmt->close();
 					$row = $res->fetch_array(MYSQLI_ASSOC);
 					return $row;
-					$stmt->close();
 				}
 			}
 		}
@@ -101,7 +106,7 @@ class model {
 	// Авто новости
 	public function get_auto_news() {
 		$cat = 'auto';
-		$cat = htmlspecialchars(trim(stripslashes($cat)));
+		$cat = $this->clr($cat);
 		$to = $this->to();
 		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
@@ -110,11 +115,11 @@ class model {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			$stmt->close();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 				$rows[] = $row;
 			}
 			if(isset($rows)) return $rows;
-			$stmt->close();
 		}
 	}
 	// Количество авто новостей
@@ -133,9 +138,9 @@ class model {
 			$stmt->bind_param('i', $id_news);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			$stmt->close();
 			$row = $res->fetch_array(MYSQLI_ASSOC);
 			return $row;
-			$stmt->close();
 		}
 	}
 	// Мото новости
@@ -150,11 +155,11 @@ class model {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			$stmt->close();
 			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 				$rows[] = $row;
 			}
 			if(isset($rows)) return $rows;
-			$stmt->close();
 		}
 	}
 	// Количество мото новостей
@@ -173,9 +178,9 @@ class model {
 			$stmt->bind_param('i', $id_news);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			$stmt->close();
 			$row = $res->fetch_array(MYSQLI_ASSOC);
 			return $row;
-			$stmt->close();
 		}
 	}
 	// PDD
@@ -192,20 +197,17 @@ class model {
 	}
 	// Поиск
 	public function search() {
-		$rows = "";
-		$search = "";
 		$to = $this->to();
 		if(empty($_GET['search'])) {
 				$_SESSION['res'] = "Поле поиск должно быть заполнено!";
 				return false;
-		} elseif(isset($_GET['search'])) {
-			$search = "\%{$_GET['search']}\%";
-			if(mb_strlen($search) < 9) {
+		} else {
+			$search = '%'.$this->clr($_GET['search']).'%';
+			if(mb_strlen($search) < 7) {
 				$_SESSION['res'] = "Слишком короткий поисковый запрос!";
 				return false;
 			}
 		}
-		$search = htmlspecialchars(trim(stripslashes($search)));
 		$query = "SELECT * FROM news WHERE title LIKE ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
 		$stmt = $this->mysqli->stmt_init();
 		if(!$stmt->prepare($query)) return false;
@@ -213,6 +215,7 @@ class model {
 			$stmt->bind_param('s', $search);
 			$stmt->execute();
 			$res = $stmt->get_result();
+			$stmt->close();
 			if($res->num_rows == 0) {
 				$_SESSION['res'] = "По вашему запросу ничего не найдено!";
 				return false;
@@ -221,13 +224,11 @@ class model {
 				$rows[] = $row;
 			}
 			return $rows;
-			$stmt->close();
 		}
 	}
 	public function count_search_news() {
-		if(isset($_GET['search'])) $search = "%{$_GET['search']}%";
-		$search = htmlspecialchars(trim(stripslashes($search)));
-		$count_search = $this->mysqli->query("SELECT * FROM news WHERE title LIKE '%$search%'");
+		if(isset($_GET['search'])) $search = $this->clr($_GET['search']);
+		$count_search = $this->mysqli->query("SELECT id_news FROM news WHERE title LIKE '%$search%'");
 		$count_search = $count_search->num_rows;
 		return $count_search;
 	}

@@ -11,22 +11,28 @@ class admin_model {
 		}
 		$this->mysqli->query("SET NAMES 'UTF8'");
 	}
-	private function sql_edit($query) {
+	private function clr_admin($x) {
+		if(get_magic_quotes_gpc()) $x = stripslashes($x);
+		$x = trim($this->mysqli->real_escape_string($x));
+		$x = str_replace("\\r\\n",'', $x);
+		return $x;
+	}
+	private function sql_select($query) {
 		$stmt = $this->mysqli->stmt_init();
 		$stmt->prepare($query);
 		$stmt->execute();
 		$res = $stmt->get_result();
+		$stmt->close();
 		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
 			$rows[] = $row;
 		}
 		return $rows;
-		$stmt->close();
 	}
 	// Вывод авто новостей
 	public function edit_auto_news() {
 		try {
 			$cat = 'auto';
-			$edit = $this->sql_edit("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
+			$edit = $this->sql_select("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
 			if(!$edit) throw new Exception("Error prepare edit_auto_news");
 			return $edit;
 		} catch(Exception $e) {
@@ -37,7 +43,7 @@ class admin_model {
 	public function edit_moto_news() {
 		try {
 			$cat = 'moto';
-			$edit = $this->sql_edit("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
+			$edit = $this->sql_select("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
 			if(!$edit) throw new Exception("Error prepare edit_moto_news");
 			return $edit;
 		} catch(Exception $e) {
@@ -47,7 +53,7 @@ class admin_model {
 	// Вывод пдд
 	public function edit_pdd() {
 		try {
-			$edit = self::sql_edit("SELECT id_pdd, name_pdd FROM pdd");
+			$edit = $this->sql_select("SELECT id_pdd, name_pdd FROM pdd");
 			if(!$edit) throw new Exception("Error prepare edit_pdd");
 			return $edit;
 		} catch(Exception $e) {
@@ -57,7 +63,7 @@ class admin_model {
 	// Вывод пунктов меню
 	public function edit_menu() {
 		try {
-			$edit = self::sql_edit("SELECT id_menu, name_menu FROM menu");
+			$edit = $this->sql_select("SELECT id_menu, name_menu FROM menu");
 			if(!$edit) throw new Exception("Error prepare edit_menu");
 			return $edit;
 		} catch(Exception $e) {
@@ -67,12 +73,12 @@ class admin_model {
 	// Добавление авто новостей
 	public function add_auto_news() {
 		if($_POST) {
-			$title = $_POST['title'];
-			$cat = $_POST['cat'];
-			$description = $_POST['description'];
-			$text = $_POST['text'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$cat = 'auto';
+			$title = $this->clr_admin(($_POST['title']));
+			$description = $this->clr_admin(($_POST['description']));
+			$text = $this->clr_admin(($_POST['text']));
+			$meta_key = $this->clr_admin(($_POST['meta_key']));
+			$meta_desc = $this->clr_admin(($_POST['meta_desc']));
 			$date = date("Y-m-d", time());
 			if(empty($title) || empty($description) || empty($text)) {
 				$_SESSION['add_auto_news']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
@@ -115,18 +121,19 @@ class admin_model {
 	// Получение текста новостей
 	public function get_text_auto_news($id_news) {
 		try {
+			$cat = 'auto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE id_news = ?";
+			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE cat = ? AND id_news = ?";
 			$stmt = $this->mysqli->stmt_init();
 			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare get_text_auto_news");
 			} else {
-				$stmt->bind_param('i', $id_news);
+				$stmt->bind_param('si', $cat, $id_news);
 				$stmt->execute();
 				$res = $stmt->get_result();
+				$stmt->close();
 				$row = $res->fetch_array(MYSQLI_ASSOC);
 				return $row;
-				$stmt->close();
 			}
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
@@ -136,12 +143,13 @@ class admin_model {
 	// Редактирование авто новостей
 	public function update_auto_news() {
 		if($_POST) {
+			$cat = 'auto';
 			$id_news = (int)$_POST['id_news'];
-			$title = $_POST['title'];
-			$description = $_POST['description'];
-			$text = $_POST['text'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$title = $this->clr_admin($_POST['title']);
+			$description = $this->clr_admin($_POST['description']);
+			$text = $this->clr_admin($_POST['text']);
+			$meta_key = $this->clr_admin($_POST['meta_key']);
+			$meta_desc = $this->clr_admin($_POST['meta_desc']);
 			if(empty($title) || empty($description) || empty($text)) {
 				$_SESSION['add_auto_news']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				return false;
@@ -154,11 +162,11 @@ class admin_model {
 				return false;
 			}
 			try {
-				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE id_news = ?";
+				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
 				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_auto_news");
 				}
-				$stmt->bind_param('ssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $id_news);
+				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
 				$stmt->execute();
 				$stmt->close();
 				$_SESSION['add_auto_news']['res'] = '<p class="success">Авто новость успешно обновлена!</p>';
@@ -173,12 +181,13 @@ class admin_model {
 	// Удаление новостей
 	public function delete_auto_news() {
 		try {
+			$cat = 'auto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-			$query = "DELETE FROM news WHERE id_news = ?";
+			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
 			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_auto_news");
 			}
-			$stmt->bind_param('i', $id_news);
+			$stmt->bind_param('si', $cat, $id_news);
 			$stmt->execute();
 			$stmt->close();
 			$_SESSION['add_auto_news']['res'] = '<p class="success">Новость успешно удалена!</p>';
@@ -192,11 +201,12 @@ class admin_model {
 	// Добавление мото новостей
 	public function add_moto_news() {
 		if($_POST) {
-			$title = $_POST['title'];
-			$description = $_POST['description'];
-			$text = $_POST['text'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$cat = 'moto';
+			$title = $this->clr_admin($_POST['title']);
+			$description = $this->clr_admin($_POST['description']);
+			$text = $this->clr_admin($_POST['text']);
+			$meta_key = $this->clr_admin($_POST['meta_key']);
+			$meta_desc = $this->clr_admin($_POST['meta_desc']);
 			$date = date("Y-m-d", time());
 			if(empty($title) || empty($description) || empty($text)) {
 				$_SESSION['add_moto_news']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
@@ -220,11 +230,11 @@ class admin_model {
 				return false;
 			}
 			try {
-				$query = "INSERT INTO moto_news (title, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				$query = "INSERT INTO news (title, cat, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare add_moto_news");
 				}
-				$stmt->bind_param('sssssss', $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+				$stmt->bind_param('ssssssss', $title, $cat, $description, $text, $meta_key, $meta_desc, $date, $img_src);
 				$stmt->execute();
 				$stmt->close();
 				$_SESSION['add_moto_news']['res'] = '<p class="success">Мото новость успешно добавлена!</p>';
@@ -239,18 +249,19 @@ class admin_model {
 	// Получение текста мото новостей
 	public function get_text_moto_news($id_news) {
 		try {
+			$cat = 'moto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE id_news = ?";
+			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE cat = ? AND id_news = ?";
 			$stmt = $this->mysqli->stmt_init();
 			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare get_text_moto_news");
 			} else {
-				$stmt->bind_param('i', $id_news);
+				$stmt->bind_param('si', $cat, $id_news);
 				$stmt->execute();
 				$res = $stmt->get_result();
+				$stmt->close();
 				$row = $res->fetch_array(MYSQLI_ASSOC);
 				return $row;
-				$stmt->close();
 			}
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
@@ -260,13 +271,13 @@ class admin_model {
 	// Редактирование мото новостей
 	public function update_moto_news() {
 		if($_POST) {
+			$cat = 'moto';
 			$id_news = (int)$_POST['id_news'];
-			$title = $_POST['title'];
-			$cat = $_POST['cat'];
-			$description = $_POST['description'];
-			$text = $_POST['text'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$title = $this->clr_admin($_POST['title']);
+			$description = $this->clr_admin($_POST['description']);
+			$text = $this->clr_admin($_POST['text']);
+			$meta_key = $this->clr_admin($_POST['meta_key']);
+			$meta_desc = $this->clr_admin($_POST['meta_desc']);
 			if(empty($title) || empty($description) || empty($text)) {
 				$_SESSION['add_moto_news']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				return false;
@@ -279,11 +290,11 @@ class admin_model {
 				return false;
 			}
 			try {
-				$query = "UPDATE news SET title = ?, cat = ? description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE id_news = ?";
+				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
 				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_moto_news");
 				}
-				$stmt->bind_param('sssssssi', $title, $cat, $description, $text, $meta_key, $meta_desc, $img_src, $id_news);
+				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
 				$stmt->execute();
 				$stmt->close();
 				$_SESSION['add_moto_news']['res'] = '<p class="success">Мото новость успешно обновлена!</p>';
@@ -298,12 +309,13 @@ class admin_model {
 	// Удаление мото новостей
 	public function delete_moto_news() {
 		try {
+			$cat = 'moto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-			$query = "DELETE FROM news WHERE id_news = ?";
+			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
 			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_moto_news");
 			}
-			$stmt->bind_param('i', $id_news);
+			$stmt->bind_param('si', $cat, $id_news);
 			$stmt->execute();
 			$stmt->close();
 			$_SESSION['add_moto_news']['res'] = '<p class="success">Мото новость успешно удалена!</p>';
@@ -317,8 +329,8 @@ class admin_model {
 	// Добавление ПДД
 	public function add_pdd() {
 		if($_POST) {
-			$name_pdd = $_POST['name_pdd'];
-			$text_pdd = $_POST['text_pdd'];
+			$name_pdd = $this->clr_admin($_POST['name_pdd']);
+			$text_pdd = $this->clr_admin($_POST['text_pdd']);
 			if(empty($name_pdd) || empty($text_pdd)) {
 				$_SESSION['add_pdd']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				$_SESSION['add_pdd']['name_pdd'] = $name_pdd;
@@ -354,9 +366,9 @@ class admin_model {
 				$stmt->bind_param('i', $id_pdd);
 				$stmt->execute();
 				$res = $stmt->get_result();
+				$stmt->close();
 				$row = $res->fetch_array(MYSQLI_ASSOC);
 				return $row;
-				$stmt->close();
 			}
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
@@ -367,8 +379,8 @@ class admin_model {
 	public function update_pdd() {
 		if($_POST) {
 			$id_pdd = (int)$_POST['id_pdd'];
-			$name_pdd = $_POST['name_pdd'];
-			$text_pdd = $_POST['text_pdd'];
+			$name_pdd = $this->clr_admin($_POST['name_pdd']);
+			$text_pdd = $this->clr_admin($_POST['text_pdd']);
 			if(empty($name_pdd) || empty($text_pdd)) {
 				$_SESSION['add_pdd']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				return false;
@@ -412,10 +424,10 @@ class admin_model {
 	// Добавление пункта меню
 	public function add_menu() {
 		if($_POST) {
-			$name_menu = $_POST['name_menu'];
-			$text_menu = $_POST['text_menu'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$name_menu = $this->clr_admin($_POST['name_menu']);
+			$text_menu = $this->clr_admin($_POST['text_menu']);
+			$meta_key = $this->clr_admin($_POST['meta_key']);
+			$meta_desc = $this->clr_admin($_POST['meta_desc']);
 			if(empty($name_menu) || empty($text_menu)) {
 				$_SESSION['add_menu']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				$_SESSION['add_menu']['name_menu'] = $name_menu;
@@ -453,9 +465,9 @@ class admin_model {
 				$stmt->bind_param('i', $id_menu);
 				$stmt->execute();
 				$res = $stmt->get_result();
+				$stmt->close();
 				$row = $res->fetch_array(MYSQLI_ASSOC);
 				return $row;
-				$stmt->close();
 			}
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
@@ -466,10 +478,10 @@ class admin_model {
 	public function update_menu() {
 		if($_POST) {
 			$id_menu = (int)$_POST['id_menu'];
-			$name_menu = $_POST['name_menu'];
-			$text_menu = $_POST['text_menu'];
-			$meta_key = $_POST['meta_key'];
-			$meta_desc = $_POST['meta_desc'];
+			$name_menu = $this->clr_admin($_POST['name_menu']);
+			$text_menu = $this->clr_admin($_POST['text_menu']);
+			$meta_key = $this->clr_admin($_POST['meta_key']);
+			$meta_desc = $this->clr_admin($_POST['meta_desc']);
 			if(empty($name_menu) || empty($text_menu)) {
 				$_SESSION['add_menu']['res'] = '<p class="error_add">Не заполнены обязательные поля!</p>';
 				return false;

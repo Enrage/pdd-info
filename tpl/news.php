@@ -1,6 +1,6 @@
-<?php $res = news::get_auto_param();?>
+<?php $res = $this->get_auto_param();?>
 <section>
-<p><?php if(isset($_SESSION['res'])) {
+<p class="session"><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];
 		unset($_SESSION['res']);
 	}?></p>

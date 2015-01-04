@@ -1,4 +1,4 @@
-<?php $res = main::get_auto_param();?>
+<?php $res = $this->get_auto_param();?>
 <section>
 <p><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];

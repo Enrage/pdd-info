@@ -15,7 +15,7 @@
 	</nav>
 	<p class="bike_cross"><img src="img/bike_cross.png" alt="Мотоцикл"></p>
 	<div class="live"><a href="http://www.liveinternet.ru/" target="_blank"><img src="img/liveinternet.jpg" height="31" width="88" alt="Liveinternet"></a></div>
-	<p class="copyright">Copyright &copy; pdd-info.ru</p>
+	<p class="copyright">Copyright &copy; pdd-info.ru &nbsp; 2014 - 2015</p>
 </footer>
 </body>
 </html>

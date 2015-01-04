@@ -1,7 +1,4 @@
-<?php
-if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
-$res = $this->m->get_text_pdd($id_pdd);
-?>
+<?php $res = $this->update_pdd_text();?>
 <section>
 	<h2>Редактирование ПДД:</h2>
 	<p><?php

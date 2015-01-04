@@ -1,7 +1,4 @@
-<?php
-if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
-$res = $this->m->get_text_menu($id_menu);
-?>
+<?php $res = $this->update_menu_text();?>
 <section>
 	<h2>Редактирование пункта меню:</h2>
 	<p><?php

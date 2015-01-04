@@ -1,7 +1,4 @@
-<?php
-isset($_SESSION['add_pdd']['name_pdd']) ? $name_pdd = $_SESSION['add_pdd']['name_pdd'] : $name_pdd = NULL;
-isset($_SESSION['add_pdd']['text_pdd']) ? $text_pdd = $_SESSION['add_pdd']['text_pdd'] : $text_pdd = NULL;
-?>
+<?php $res = $this->session_pdd();?>
 <section>
 	<h2>Добавление ПДД:</h2>
 	<p><?php
@@ -11,9 +8,9 @@ isset($_SESSION['add_pdd']['text_pdd']) ? $text_pdd = $_SESSION['add_pdd']['text
 	} ?></p>
 	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<p>Название правила:<br>
-		<input type="text" name="name_pdd" id="title_news" value="<?=$name_pdd?>"></p>
+		<input type="text" name="name_pdd" id="title_news" value="<?=htmlspecialchars($res[0])?>"></p>
 		<p>Текст правила:<br>
-		<textarea name="text_pdd" cols="130" rows="10" id="editor1"><?=$text_pdd?></textarea>
+		<textarea name="text_pdd" cols="130" rows="10" id="editor1"><?=$res[1]?></textarea>
 		<script type="text/javascript">
 			CKEDITOR.replace('editor1');
 		</script></p>

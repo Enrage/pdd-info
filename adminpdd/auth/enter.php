@@ -11,7 +11,7 @@ if(isset($_SESSION['auth']['admin'])) {
 $mysqli = new mysqli(HOST, USER, PASS, DB);
 if($_POST) {
 	try {
-		$login_pdd = trim($mysqli->real_escape_string($_POST['login_pdd']));
+		$login_pdd = trim($mysqli->real_escape_string(strip_tags($_POST['login_pdd'])));
 		$pass_pdd = trim($_POST['pass_pdd']);
 		$query = "SELECT name_pdd, login_pdd, pass_pdd FROM pdd_users WHERE login_pdd = ? AND admin_pdd = 1 LIMIT 1";
 		$stmt = $mysqli->stmt_init();

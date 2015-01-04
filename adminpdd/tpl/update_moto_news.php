@@ -1,7 +1,4 @@
-<?php
-if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-$res = $this->m->get_text_moto_news($id_news);
-?>
+<?php $res = $this->update_moto_news_text();?>
 <section>
 	<h2>Редактирование мото новости:</h2>
 	<p><?php

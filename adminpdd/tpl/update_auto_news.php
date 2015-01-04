@@ -1,7 +1,4 @@
-<?php
-if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
-$res = $this->m->get_text_auto_news($id_news);
-?>
+<?php $res = $this->update_auto_news_text();?>
 <section>
 	<h2>Редактирование авто новости:</h2>
 	<p><?php

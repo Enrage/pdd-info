@@ -26,7 +26,7 @@ article, aside, details, footer, header, hgroup, menu, nav, section {
 	clear: both;
 }
 body {
-	background: url(../img/back4.jpg) #fff;
+	background: url(../img/bg7.jpg) #fff;
 }
 #wrapper {
 	width: 1000px;
@@ -42,6 +42,10 @@ header p a img {
 	position: relative;
 	top: 7px;
 	left: 10px;
+}
+.session {
+	color: #a00;
+	padding: 0 0 0 20px;
 }
 /* Navigation */
 nav.top_menu {
@@ -142,6 +146,9 @@ section > p > a:hover {
 	margin: 10px 0;
 	text-align: center;
 }
+#pdd_desc p {
+	padding: 0 20px;
+}
 h3 a {
 	color: #0070ff;
 	float: left;
@@ -171,7 +178,11 @@ section article {
 .article h3 {
 	color: #0070ff;
 	font: 22px Roboto, Tahoma, Arial, Verdana;
+	margin: 0 0 35px;
 	text-align: center;
+}
+.article p {
+	margin: 5px 20px 10px;
 }
 section article p.img_article + h3 + p.time_article + p {
 	margin: 65px 0 0 222px;
@@ -186,14 +197,9 @@ section article p.img_article + h3 + p.time_article + p {
 .time_article {
 	position: absolute;
 	right: 30px;
-	top: 30px;
-}
-p.time_article {
+	top: 35px;
 	color: #999;
 	font: 14px Roboto, Tahoma, Arial, Verdana;
-}
-.time_article + p {
-	margin: 30px 20px 20px;
 }
 .more {
 	bottom: 15px;
