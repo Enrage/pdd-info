@@ -13,8 +13,7 @@ class admin_model {
 	}
 	private function clr_admin($x) {
 		if(get_magic_quotes_gpc()) $x = stripslashes($x);
-		$x = trim($this->mysqli->real_escape_string($x));
-		$x = str_replace("\\r\\n",'', $x);
+		$x = trim($x);
 		return $x;
 	}
 	private function sql_select($query) {
@@ -103,7 +102,8 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO news (title, cat, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare add_auto_news");
 				}
 				$stmt->bind_param('ssssssss', $title, $cat, $description, $text, $meta_key, $meta_desc, $date, $img_src);
@@ -163,7 +163,8 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare update_auto_news");
 				}
 				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
@@ -184,7 +185,8 @@ class admin_model {
 			$cat = 'auto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
-			if(!$stmt = $this->mysqli->prepare($query)) {
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare delete_auto_news");
 			}
 			$stmt->bind_param('si', $cat, $id_news);
@@ -231,7 +233,8 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO news (title, cat, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare add_moto_news");
 				}
 				$stmt->bind_param('ssssssss', $title, $cat, $description, $text, $meta_key, $meta_desc, $date, $img_src);
@@ -291,7 +294,8 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare update_moto_news");
 				}
 				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
@@ -312,7 +316,8 @@ class admin_model {
 			$cat = 'moto';
 			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
-			if(!$stmt = $this->mysqli->prepare($query)) {
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare delete_moto_news");
 			}
 			$stmt->bind_param('si', $cat, $id_news);
@@ -339,7 +344,8 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO pdd (name_pdd, text_pdd) VALUES (?, ?)";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare add_pdd");
 				}
 				$stmt->bind_param('ss', $name_pdd, $text_pdd);
@@ -387,7 +393,8 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE pdd SET name_pdd = ?, text_pdd = ? WHERE id_pdd = ?";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare update_pdd");
 				}
 				$stmt->bind_param('ssi', $name_pdd, $text_pdd, $id_pdd);
@@ -407,7 +414,8 @@ class admin_model {
 		try {
 			if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
 			$query = "DELETE FROM pdd WHERE id_pdd = ?";
-			if(!$stmt = $this->mysqli->prepare($query)) {
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare delete_pdd");
 			}
 			$stmt->bind_param('i', $id_pdd);
@@ -438,7 +446,8 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO menu (name_menu, text_menu, meta_key, meta_desc) VALUES (?, ?, ?, ?)";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare add_menu");
 				}
 				$stmt->bind_param('ssss', $name_menu, $text_menu, $meta_key, $meta_desc);
@@ -488,7 +497,8 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE menu SET name_menu = ?, text_menu = ?, meta_key = ?, meta_desc = ? WHERE id_menu = ?";
-				if(!$stmt = $this->mysqli->prepare($query)) {
+				$stmt = $this->mysqli->stmt_init();
+				if(!$stmt->prepare($query)) {
 					throw new Exception("Error prepare update_menu");
 				}
 				$stmt->bind_param('ssssi', $name_menu, $text_menu, $meta_key, $meta_desc, $id_menu);
@@ -508,7 +518,8 @@ class admin_model {
 		try {
 			if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
 			$query = "DELETE FROM menu WHERE id_menu = ?";
-			if(!$stmt = $this->mysqli->prepare($query)) {
+			$stmt = $this->mysqli->stmt_init();
+			if(!$stmt->prepare($query)) {
 				throw new Exception("Error prepare delete_menu");
 			}
 			$stmt->bind_param('i', $id_menu);

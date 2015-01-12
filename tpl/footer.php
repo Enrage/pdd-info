@@ -8,6 +8,7 @@
 			<li><a href="?option=news">Новости</a></li>
 			<li><a href="?option=moto">Мото</a></li>
 			<li><a href="?option=pdd">ПДД</a></li>
+			<li><a href="?option=bilets">Билеты</a></li>
 			<?php foreach($footer as $row): ?>
 			<li><a href="?option=menu&amp;id_menu=<?=$row['id_menu']?>"><?=$row['name_menu']?></a></li>
 			<?php endforeach; ?>

@@ -14,5 +14,5 @@ if(isset($_GET['option'])) {
 if(class_exists($class)) {
 	$obj = new $class;
 	$obj->get_body($class);
-} else die("<p>Неправильные данные для входа</p>");
+} else die("<p>Access Denied</p>");
 ?>

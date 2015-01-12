@@ -1,3 +1,6 @@
+<?php if(isset($_POST['test'])) {
+		$this->get_post();
+}?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -20,6 +23,9 @@
 	<link rel="stylesheet" href="css/ie8.css">
 	<![endif]-->
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-1.11.1.js"></script>
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="js/script.js"></script>
 </head>
 <body>
 <div id="wrapper">
