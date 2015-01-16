@@ -7,8 +7,8 @@
 	<?php if(!empty($content)): ?>
 	<?php foreach ($content as $row): ?>
 	<article class="article_desc" id="pdd_desc">
-		<h3><?=$row['name_pdd']?></h3>
-		<?=$row['text_pdd']?>
+		<h3><?=$row[1]?></h3>
+		<?=$row[2]?>
 	</article>
 	<?php endforeach; ?>
 	<div class="pagination"><?php print $this->m->page_nav($res[0], $res[1]); ?></div>

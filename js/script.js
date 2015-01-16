@@ -28,6 +28,23 @@ $(document).ready(function() {
 		console.log(next);
 	});*/
 	$('.next').click(function() {
+        var length = $('.paginat a').length - 1;
+        $('.paginat a').each(function(index) {
+            if($(this).hasClass('nav-active') && index != length) {
+                $(this).removeClass('nav-active')
+                  .next('a').addClass('nav-active');
+                $('.question').fadeOut(25).eq(index+1).fadeIn();
+                return false;
+            } else if (index == length) {
+                $(this).removeClass('nav-active');
+                $('.paginat').find('a').first().addClass('nav-active');
+                $('.question').fadeOut(25).eq(0).fadeIn();
+                return false;
+            }
+        });
+    });
+
+	/*$('.next').click(function() {
         var prevActive = $('.paginat').find('a.nav-active');
         var next = prevActive.next('a');
         // if(!next) {
@@ -41,8 +58,8 @@ $(document).ready(function() {
             if($(this).hasClass('nav-active')) { // Если находит ссылку с классом active
                 $('.question').eq(index).fadeIn(); // То показывает блок с классом .text-block, который стоит по счёту (переменная index) таким же как активная ссылка
             }
-        });
-    });
+        });*/
+    // });
 
 
 

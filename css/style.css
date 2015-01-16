@@ -46,6 +46,7 @@ header p a img {
 }
 .session {
 	color: #a00;
+	font: 16px Roboto, Tahoma, Arial, Verdana;
 	padding: 0 0 0 20px;
 }
 /* Navigation */
@@ -325,9 +326,15 @@ h3.nbilet {
 	font: 22px Roboto, Tahoma, Arial, Verdana;
 	margin: 0 0 14px;
 }
+.img_bilet {
+	border: 1px solid #666;
+	display: block;
+	margin: 0 auto;
+}
 .q {
+	color: #111;
 	border-bottom: 2px solid #ddd;
-	font: 17px Roboto, Tahoma, Arial, Verdana;
+	font: bold 15px Roboto, Tahoma, Arial, Verdana;
 	margin: 0 20px 10px;
 	padding: 0 0 10px;
 	text-align: left;
@@ -335,7 +342,7 @@ h3.nbilet {
 .a {
 	font: 15px Roboto, Tahoma, Arial, Verdana;
 	text-align: left;
-	margin: 7px 0 7px 20px;
+	margin: 7px 20px;
 }
 .a input, .a label {
 	cursor: pointer;
@@ -378,6 +385,31 @@ h3.nbilet {
 }
 .count-res {
 	font: 16px Roboto, Tahoma, Arial, Verdana !important;
+	margin: 0 0 20px 0;
+}
+.question-res {
+	border: 2px solid #999;
+	margin: 40px 20px 15px;
+	padding: 5px;
+}
+.ok {
+	border: 1px dotted #adc092;
+	background: #eafdea;
+	color: #58715e;
+}
+.error {
+	border: 1px dotted #ddb1b1;
+	background: #ffeded;
+	color: #7f4444;
+}
+.ok2 {
+	background: #9f9;
+	color: #005500;
+}
+.error2 {
+	background: #f77;
+	color: #000;
+	text-decoration: line-through;
 }
 /* Pagination */
 .paginat {
@@ -388,10 +420,13 @@ h3.nbilet {
 	background: #eee;
 	border: 1px solid #666;
 	color: #000;
+	display: inline-block;
 	font: 15px Roboto, Tahoma, Arial, Verdana;
+	height: 22px;
 	margin: 0 5px;
-	padding: 2px 8px;
+	padding: 2px 0;
 	text-decoration: none;
+	width: 28px;
 }
 .paginat a:hover {
 	background: #cfc;

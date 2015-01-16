@@ -1,0 +1,10 @@
+{
+	"default": {
+	"host": "vh46454.cp.eurobyte.ru",
+	"username": "vh46454",
+	"password": "NN6WjsBL",
+	"path": "/www/dano.msk.ru",
+	"upload_on_save": true,
+	"tls": false
+	}
+}

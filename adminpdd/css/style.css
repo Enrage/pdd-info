@@ -173,8 +173,9 @@ h1 {
 	color: #c50;
 }
 .form_login {
-	position: relative;
-	top: 200px;
+	left: 40.5%;
+	position: absolute;
+	top: 35%;
 }
 .form_login h2 {
 	color: #333;

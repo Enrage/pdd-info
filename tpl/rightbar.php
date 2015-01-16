@@ -9,7 +9,7 @@
 			<p class="bilet_pdd">ПДД<br>билеты</p>
 			<ul>
 				<?php foreach($rightbar as $value): ?>
-				<li><a href="?option=bilet&amp;id_bilet=<?=$value['id']?>"><?=$value['bilet']?></a></li>
+				<li><a href="?option=bilet&amp;id_bilet=<?=$value[0]?>"><?=$value[1]?></a></li>
 				<?php endforeach; ?>
 			</ul>
 			<img src="img/kirpich.png" height="318" width="97" alt="Дорожный знак">

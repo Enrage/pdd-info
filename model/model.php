@@ -62,23 +62,20 @@ class model {
 		if($nPage < ($pages - 2)) $last = "<a href='".$uri."page=".$pages."' class='dark-page-nav'>>></a>";
 		return $first.$back.$page2left.$page1left.$page.$page1right.$page2right.$forward.$last;
 	}
-	// SQL Запрос
-	private function sql_edit($query) {
-		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) return false;
-		$stmt->execute();
-		$res = $stmt->get_result();
-		$stmt->close();
-		$rows = array();
-		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$rows[] = $row;
-		}
-		return $rows;
-	}
 	// Top Menu
 	public function get_top_menu() {
-		$edit = $this->sql_edit("SELECT id_menu, name_menu FROM menu");
-		return $edit;
+		$query = "SELECT id_menu, name_menu FROM menu";
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
+		else {
+			$stmt->execute();
+			$stmt->bind_result($id_menu, $name_menu);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_menu, $name_menu);
+			}
+			$stmt->close();
+			return $rows;
+		}
 	}
 	// Text Top Menu
 	public function get_text_menu($id_menu) {
@@ -88,23 +85,35 @@ class model {
 			if(!$id_menu) print "Неправильные данные для вывода меню";
 			else {
 				$query = "SELECT * FROM menu WHERE id_menu = ?";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+				if(!$stmt = $this->mysqli->prepare($query)) return false;
 				else {
 					$stmt->bind_param('i', $id_menu);
 					$stmt->execute();
-					$res = $stmt->get_result();
+					$stmt->bind_result($id_menu, $name_menu, $text_menu, $meta_key, $meta_desc);
+					$rows = array();
+					while($stmt->fetch()) {
+						$rows[] = array($id_menu, $name_menu, $text_menu, $meta_key, $meta_desc);
+					}
 					$stmt->close();
-					$row = $res->fetch_array(MYSQLI_ASSOC);
-					return $row;
+					return $rows;
 				}
 			}
 		}
 	}
 	// Rightbar
 	public function get_rightbar() {
-		$edit = $this->sql_edit("SELECT * FROM bilets");
-		return $edit;
+		$query = "SELECT * FROM bilets";
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
+		else {
+			$stmt->execute();
+			$stmt->bind_result($id, $bilet);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id, $bilet);
+			}
+			$stmt->close();
+		}
+		return $rows;
 	}
 	// Auto News
 	public function get_auto_news() {
@@ -116,12 +125,19 @@ class model {
 		else {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
-			$res = $stmt->get_result();
-			$stmt->close();
+			$stmt->bind_result($id_news, $cat, $title, $description, $date, $img_src);
 			$rows = array();
-			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-				$rows[] = $row;
+			while($stmt->fetch()) {
+				// $rows[] = array(
+				// 	'id_news' => $id_news,
+				// 	'cat' => $cat,
+				// 	'title' => $title,
+				// 	'description' => $description,
+				// 	'date' => $date,
+				// 	'img_src' => $img_src);
+				$rows[] = array($id_news, $cat, $title, $description, $date, $img_src);
 			}
+			$stmt->close();
 			return $rows;
 		}
 	}
@@ -132,38 +148,39 @@ class model {
 		return $count_auto_news;
 	}
 	public function get_text_auto_news($id_news) {
-		if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
 		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE cat = 'auto' AND id_news = ?";
-		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		if(!$stmt = $this->mysqli->prepare($query)) print "Ошибка подготовки запроса";
 		else {
 			$stmt->bind_param('i', $id_news);
 			$stmt->execute();
-			$res = $stmt->get_result();
+			$stmt->bind_result($id_news, $title, $text, $meta_key, $meta_desc, $date);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $title, $text, $meta_key, $meta_desc, $date);
+			}
 			$stmt->close();
-			$row = $res->fetch_array(MYSQLI_ASSOC);
-			return $row;
+			// return $row;
 		}
+		return $rows;
 	}
 	// Moto News
 	public function get_moto_news() {
 		$cat = 'moto';
-		$cat = htmlspecialchars(trim(stripslashes($cat)));
+		$cat = $this->clr($cat);
 		$to = $this->to();
 		$query = "SELECT id_news, cat, title, description, date, img_src FROM news WHERE cat = ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
-		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) return false;
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
 		else {
 			$stmt->bind_param('s', $cat);
 			$stmt->execute();
-			$res = $stmt->get_result();
-			$stmt->close();
+			$stmt->bind_result($id_news, $cat, $title, $description, $date, $img_src);
 			$rows = array();
-			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-				$rows[] = $row;
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $cat, $title, $description, $date, $img_src);
 			}
-			return $rows;
+			$stmt->close();
 		}
+		return $rows;
 	}
 	// Count Moto News
 	public function count_moto_news() {
@@ -172,24 +189,35 @@ class model {
 		return $count_moto_news;
 	}
 	public function get_text_moto_news($id_news) {
-		if(isset($_GET['id_news'])) $id_news = (int)$_GET['id_news'];
 		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE cat = 'moto' AND id_news = ?";
-		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) print "Ошибка подготовки запроса";
+		if(!$stmt = $this->mysqli->prepare($query)) print "Ошибка подготовки запроса";
 		else {
 			$stmt->bind_param('i', $id_news);
 			$stmt->execute();
-			$res = $stmt->get_result();
+			$stmt->bind_result($id_news, $title, $text, $meta_key, $meta_desc, $date);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $title, $text, $meta_key, $meta_desc, $date);
+			}
 			$stmt->close();
-			$row = $res->fetch_array(MYSQLI_ASSOC);
-			return $row;
 		}
+		return $rows;
 	}
 	// PDD
 	public function get_pdd() {
 		$to = $this->to();
-		$edit = $this->sql_edit("SELECT * FROM pdd ORDER BY id_pdd LIMIT {$to}, {$this->limit}");
-		return $edit;
+		$query = "SELECT * FROM pdd ORDER BY id_pdd LIMIT {$to}, {$this->limit}";
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
+		else {
+			$stmt->execute();
+			$stmt->bind_result($id_pdd, $name_pdd, $text_pdd);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_pdd, $name_pdd, $text_pdd);
+			}
+			$stmt->close();
+		}
+		return $rows;
 	}
 	// Count PDD
 	public function count_pdd() {
@@ -201,8 +229,8 @@ class model {
 	public function search() {
 		$to = $this->to();
 		if(empty($_GET['search'])) {
-				$_SESSION['res'] = "Поле поиск должно быть заполнено!";
-				return false;
+			$_SESSION['res'] = "Поле поиск должно быть заполнено!";
+			return false;
 		} else {
 			$search = '%'.$this->clr($_GET['search']).'%';
 			if(mb_strlen($search) < 7) {
@@ -211,21 +239,20 @@ class model {
 			}
 		}
 		$query = "SELECT * FROM news WHERE title LIKE ? ORDER BY date DESC, id_news DESC LIMIT {$to}, {$this->limit}";
-		$stmt = $this->mysqli->stmt_init();
-		if(!$stmt->prepare($query)) return false;
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
 		else {
 			$stmt->bind_param('s', $search);
 			$stmt->execute();
-			$res = $stmt->get_result();
-			$stmt->close();
-			if($res->num_rows == 0) {
+			$stmt->bind_result($id_news, $cat, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $cat, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+			}
+			if(empty($rows)) {
 				$_SESSION['res'] = "По вашему запросу ничего не найдено!";
 				return false;
 			}
-			$rows = array();
-			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-				$rows[] = $row;
-			}
+			$stmt->close();
 			return $rows;
 		}
 	}
@@ -242,14 +269,14 @@ class model {
 		if(!$stmt->prepare($query)) return false;
 		else {
 			$stmt->execute();
-			$res = $stmt->get_result();
-			$stmt->close();
+			$stmt->bind_result($id, $bilet);
 			$rows = array();
-			while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-				$rows[] = $row;
+			while($stmt->fetch()) {
+				$rows[] = array($id, $bilet);
 			}
-			return $rows;
+			$stmt->close();
 		}
+		return $rows;
 	}
 	// Получение данных по билету
 	public function get_bilet_data($id_bilet) {
@@ -258,13 +285,13 @@ class model {
 		$stmt = $this->mysqli->prepare($query);
 		$stmt->bind_param('i', $id_bilet);
 		$stmt->execute();
-		$res = $stmt->get_result();
-		$stmt->close();
-		$data = null;
-		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$data[$row['parent_question']][0] = $row['question'];
-			$data[$row['parent_question']][$row['id']] = $row['answer'];
+		$stmt->bind_result($question, $parent_bilet, $id, $answer, $parent_question);
+		$data = array();
+		while($stmt->fetch()) {
+			$data[$parent_question][0] = $question;
+			$data[$parent_question][$id] = $answer;
 		}
+		$stmt->close();
 		return $data;
 	}
 	// Навигация по вопросам из билета
@@ -289,12 +316,12 @@ class model {
 		$stmt = $this->mysqli->prepare($query);
 		$stmt->bind_param('i', $test);
 		$stmt->execute();
-		$res = $stmt->get_result();
-		$stmt->close();
-		$data = null;
-		while($row = $res->fetch_assoc()) {
-			$data[$row['question_id']] = $row['answer_id'];
+		$stmt->bind_result($question_id, $answer_id);
+		$data = array();
+		while($stmt->fetch()) {
+			$data[$question_id] = $answer_id;
 		}
+		$stmt->close();
 		return $data;
 	}
 	public function get_bilet_data_result($test_all_data, $result, $post) {
@@ -331,6 +358,8 @@ class model {
 		}
 		$correct_answer_count = $all_count - $incorrect_answer_count;
 		$percent = round(($correct_answer_count / $all_count * 100), 2);
+		if($percent < 40) return '<p class="session">Вы набрали менее 40% правильных ответов. Попробуйте еще раз</p>';
+		// Вывод результатов
 		$print_res = '<div class="questions">';
 		$print_res .= '<div class="count-res">';
 		$print_res .= "<p>Всего вопросов: <b>{$all_count}</b></p>";
@@ -338,7 +367,37 @@ class model {
 		$print_res .= "<p><span style='color:red;'>Неверно отвечено: </span><b>{$incorrect_answer_count}</b></p>";
 		$print_res .= "<p>Процент верных ответов: <b>{$percent}%</b></p>";
 		$print_res .= '</div>';
-		$print_res .= '</div>';
+		// Вывод теста
+		foreach($test_all_data_result as $id_question => $item) {
+			$correct_answer = $item['correct_answer'];
+			$incorrect_answer = null;
+			if(isset($item['incorrect_answer'])) {
+				$incorrect_answer = $item['incorrect_answer'];
+				$class = 'question-res error';
+			} else {
+				$class = 'question-res ok';
+			}
+			$print_res .= "<div class='$class'>";
+			foreach($item as $id_answer => $answer) { // массив ответов
+				if(!$id_answer) {
+					$print_res .= "<p class='q'>$answer</p>";
+				} elseif(is_numeric($id_answer)) {
+					// ответ
+					if($id_answer == $correct_answer) {
+						// если это верный ответ
+						$class = 'a ok2';
+					} elseif($id_answer == $incorrect_answer) {
+						// если это неверный ответ
+						$class = 'a error2';
+					} else {
+						$class = 'a';
+					}
+					$print_res .= "<p class='$class'>$answer</p>";
+				}
+			}
+			$print_res .= "</div>"; // .question-res
+		}
+		$print_res .= '</div>'; // .questions
 		return $print_res;
 	}
 }

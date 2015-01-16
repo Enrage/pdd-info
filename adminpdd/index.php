@@ -4,12 +4,12 @@ header("Content-Type:text/html;charset=UTF-8");
 include_once '../config.php';
 include_once 'model/admin_model.php';
 if(!$_SESSION['auth']['admin']) {
-	header("Location: ".PATH."adminpdd/auth/enter.php");
+	header("Location: auth/enter.php");
 }
 if(isset($_GET['option'])) {
 	if($_GET['option'] == "logout") {
 		unset($_SESSION['auth']);
-		header("Location: ".PATH."adminpdd/auth/enter.php");
+		header("Location: auth/enter.php");
 	}
 }
 function __autoload($c) {
