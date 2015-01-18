@@ -1,4 +1,5 @@
 <?php
+define('PDD', true);
 session_start();
 header("Content-Type:text/html;charset=UTF-8");
 include_once '../config.php';
@@ -27,7 +28,5 @@ if(isset($_GET['option'])) {
 if(class_exists($class)) {
 	$obj = new $class;
 	$obj->get_body($class);
-} else {
-	die("<p>Неправильные данные для входа</p>");
-}
+} else die("<p style='color:#900;font:16px Roboto, Tahoma;'>Access Denied</p>");
 ?>

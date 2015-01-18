@@ -1,4 +1,5 @@
 <?php
+define('PDD', true);
 session_start();
 include_once '../model/admin_model.php';
 include_once '../../config.php';
@@ -17,8 +18,8 @@ if($_POST) {
 		if(!$stmt = $mysqli->prepare($query)) throw new Exception("Error Prepare Login");
 		else {
 			$stmt->bind_param('s', $login_pdd);
-			if(!$stmt->execute()) throw new Exception("Error execute");
-			if(!$stmt->bind_result($name, $login, $pass)) throw new Exception("Error bind_result");
+			$stmt->execute();
+			$stmt->bind_result($name, $login, $pass);
 			$rows = array();
 			while($stmt->fetch()) {
 				$rows[] = array($name, $login, $pass);
@@ -52,9 +53,9 @@ if($_POST) {
 	<div class="form_login">
 	<h2>Administration Panel PDD-INFO</h2>
 	<p><?php
-	if(isset($_SESSION['res'])) {
-		echo $_SESSION['res'];
-		unset($_SESSION['res']);}?></p>
+		if(isset($_SESSION['res'])) {
+			echo $_SESSION['res'];
+			unset($_SESSION['res']);}?></p>
 		<form action="" method="post" autocomplete="off" id="login">
 			<p><input type="text" name="login_pdd" placeholder="Username"></p>
 			<p><input type="password" name="pass_pdd" placeholder="Password"></p>

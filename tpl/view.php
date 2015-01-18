@@ -1,5 +1,5 @@
-<?php $res = $this->get_content(); ?>
 <section>
+	<?php if(!empty($content)): ?>
 	<?php foreach ($content as $res): ?>
 	<article class="article">
 		<h3><?=$res[1]?></h3>
@@ -7,4 +7,5 @@
 		<?=$res[2]?>
 	</article>
 	<?php endforeach; ?>
+	<?php endif; ?>
 </section>

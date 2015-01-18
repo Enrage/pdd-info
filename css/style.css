@@ -26,8 +26,8 @@ article, aside, details, footer, header, hgroup, menu, nav, section {
 	clear: both;
 }
 body {
-	/*background: url(../img/bg7.jpg);*/
-	background: #ded;
+	background: url(../img/bg7.jpg);
+	/*background: #ded;*/
 }
 #wrapper {
 	width: 1000px;
@@ -312,9 +312,10 @@ ul.bilet_otvet li a:hover {
 }
 /* Bilet */
 .bilet {
-	border: 7px solid #f0f0f0;
+	background: #f5fff5;
+	border: 7px solid #e5e5e5;
 	margin: 0 20px;
-	padding: 20px 15px;
+	padding: 10px 15px 20px;
 }
 #id_bilet {
 	color: #333;
@@ -324,7 +325,12 @@ ul.bilet_otvet li a:hover {
 h3.nbilet {
 	color: #333;
 	font: 22px Roboto, Tahoma, Arial, Verdana;
-	margin: 0 0 14px;
+	margin: 0 0 10px;
+}
+.n_question {
+	color: #333;
+	font: 24px Roboto, Tahoma, Arial, Verdana;
+	margin: 26px 0 15px;
 }
 .img_bilet {
 	border: 1px solid #666;
@@ -389,16 +395,16 @@ h3.nbilet {
 }
 .question-res {
 	border: 2px solid #999;
-	margin: 40px 20px 15px;
+	margin: 10px 20px 15px;
 	padding: 5px;
 }
 .ok {
-	border: 1px dotted #adc092;
+	border: 2px dotted #adc092;
 	background: #eafdea;
 	color: #58715e;
 }
 .error {
-	border: 1px dotted #ddb1b1;
+	border: 2px dotted #ddb1b1;
 	background: #ffeded;
 	color: #7f4444;
 }

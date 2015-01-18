@@ -1,8 +1,9 @@
 <?php
+defined('PDD') or die("<p style='color:#700;font:16px Roboto, Tahoma;'>Access Denied</p>");
 class add_menu extends Core_Admin {
 	public function get_content() {
 		$res = $this->m->add_menu();
-		return $res;
+		return true;
 	}
 	protected function get_add_menu() {
 		isset($_SESSION['add_menu']['name_menu']) ? $name_menu = $_SESSION['add_menu']['name_menu'] : $name_menu = NULL;

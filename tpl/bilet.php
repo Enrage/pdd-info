@@ -9,6 +9,8 @@ $res = $this->get_content();
 		<h3 class="nbilet">Билет №<span id="id_bilet"><?=$id_bilet?></span></h3>
 			<?php foreach($res as $id_question => $item): ?>
 			<div class="question" data-id="<?=$id_question?>" id="question-<?=$id_question?>">
+				<?php $n_question = $id_question - 20 * $id_bilet + 20;?>
+				<h4 class="n_question">Вопрос <?=$n_question?></h4>
 				<?php foreach($item as $id_answer => $answer): ?>
 					<?php if(!$id_answer): ?>
 					<p class="q"><?=$answer?></p>
@@ -21,6 +23,7 @@ $res = $this->get_content();
 				<?php endforeach; // $item ?>
 			</div>
 			<?php endforeach; // $res ?>
+			<?php  ?>
 		<div class="next_button">
 			<button class="next">Следующий вопрос</button>
 		</div>

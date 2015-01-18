@@ -1,4 +1,5 @@
 <?php $res = $this->get_auto_param();?>
+<?php define("PDD", true); ?>
 <section>
 <p class="session"><?php if(isset($_SESSION['res'])) {
 		print $_SESSION['res'];

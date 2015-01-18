@@ -1,4 +1,5 @@
 <?php
+defined('PDD') or die("<p style='color:#700;font:16px Roboto, Tahoma;'>Access Denied</p>");
 class model {
 	public $mysqli;
 	public $limit = QUANTITY_NEWS;
@@ -74,8 +75,8 @@ class model {
 				$rows[] = array($id_menu, $name_menu);
 			}
 			$stmt->close();
-			return $rows;
 		}
+		return $rows;
 	}
 	// Text Top Menu
 	public function get_text_menu($id_menu) {
@@ -95,8 +96,8 @@ class model {
 						$rows[] = array($id_menu, $name_menu, $text_menu, $meta_key, $meta_desc);
 					}
 					$stmt->close();
-					return $rows;
 				}
+				return $rows;
 			}
 		}
 	}
@@ -114,6 +115,7 @@ class model {
 			$stmt->close();
 		}
 		return $rows;
+
 	}
 	// Auto News
 	public function get_auto_news() {
@@ -138,8 +140,8 @@ class model {
 				$rows[] = array($id_news, $cat, $title, $description, $date, $img_src);
 			}
 			$stmt->close();
-			return $rows;
 		}
+		return $rows;
 	}
 	// Count Auto News
 	public function count_auto_news() {
@@ -149,7 +151,7 @@ class model {
 	}
 	public function get_text_auto_news($id_news) {
 		$query = "SELECT id_news, title, text, meta_key, meta_desc, date FROM news WHERE cat = 'auto' AND id_news = ?";
-		if(!$stmt = $this->mysqli->prepare($query)) print "Ошибка подготовки запроса";
+		if(!$stmt = $this->mysqli->prepare($query)) return false;
 		else {
 			$stmt->bind_param('i', $id_news);
 			$stmt->execute();
@@ -159,7 +161,6 @@ class model {
 				$rows[] = array($id_news, $title, $text, $meta_key, $meta_desc, $date);
 			}
 			$stmt->close();
-			// return $row;
 		}
 		return $rows;
 	}
@@ -253,8 +254,8 @@ class model {
 				return false;
 			}
 			$stmt->close();
-			return $rows;
 		}
+		return $rows;
 	}
 	public function count_search_news() {
 		if(isset($_GET['search'])) $search = $this->mysqli->real_escape_string($this->clr($_GET['search']));
@@ -353,14 +354,21 @@ class model {
 		$correct_answer_count = 0; // Кол-во верных ответов
 		$incorrect_answer_count = 0; // Кол-во неверных ответов
 		$percent = 0; // Процент верных ответов
+		$print_res = "";
 		foreach($test_all_data_result as $item) {
 			if(isset($item['incorrect_answer'])) $incorrect_answer_count++;
 		}
 		$correct_answer_count = $all_count - $incorrect_answer_count;
 		$percent = round(($correct_answer_count / $all_count * 100), 2);
-		if($percent < 40) return '<p class="session">Вы набрали менее 40% правильных ответов. Попробуйте еще раз</p>';
+		if($percent < 20) return '<p class="session">Вы набрали менее 40% правильных ответов. Попробуйте еще раз</p>';
+		elseif($correct_answer_count < 18) {
+			$print_res .= '<p class="session">Извините, Вы провалили тест, попробуйте еще раз</p>';
+		}
+		elseif($correct_answer_count > 18) {
+			$print_res .= '<p class="session">Поздравляем, Вы успешно сдали тест</p>';
+		}
 		// Вывод результатов
-		$print_res = '<div class="questions">';
+		$print_res .= '<div class="questions">';
 		$print_res .= '<div class="count-res">';
 		$print_res .= "<p>Всего вопросов: <b>{$all_count}</b></p>";
 		$print_res .= "<p><span style='color:green;'>Верно отвечено: </span><b>{$correct_answer_count}</b></p>";
@@ -368,6 +376,7 @@ class model {
 		$print_res .= "<p>Процент верных ответов: <b>{$percent}%</b></p>";
 		$print_res .= '</div>';
 		// Вывод теста
+		$print_res .= "<p class='n_question'>Ответы на вопросы:</p>";
 		foreach($test_all_data_result as $id_question => $item) {
 			$correct_answer = $item['correct_answer'];
 			$incorrect_answer = null;

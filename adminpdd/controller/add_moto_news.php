@@ -1,8 +1,9 @@
 <?php
+defined('PDD') or die("<p style='color:#700;font:16px Roboto, Tahoma;'>Access Denied</p>");
 class add_moto_news extends Core_Admin {
 	public function get_content() {
 		$res = $this->m->add_moto_news();
-		return $res;
+		return true;
 	}
 	protected function session_moto_news() {
 		isset($_SESSION['add_moto_news']['title']) ? $title = $_SESSION['add_moto_news']['title'] : $title = NULL;

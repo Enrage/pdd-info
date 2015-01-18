@@ -13,9 +13,9 @@
 	</tr>
 	<?php foreach ($content as $row): ?>
 	<tr>
-		<td><a href="?option=update_moto_news&amp;id_news=<?=$row['id_news']?>"><?=$row['title']?></a></td>
-		<td class="td_date"><?=$row['date']?></td>
-		<td class="del_news"><a href="?option=delete_moto_news&amp;id_news=<?=$row['id_news']?>">Del&nbsp;<img src="img/del.png" width="12" alt="delete"></a></td>
+		<td><a href="?option=update_moto_news&amp;id_news=<?=$row[0]?>"><?=$row[1]?></a></td>
+		<td class="td_date"><?=$row[2]?></td>
+		<td class="del_news"><a href="?option=delete_moto_news&amp;id_news=<?=$row[0]?>">Del&nbsp;<img src="img/del.png" width="12" alt="delete"></a></td>
 	</tr>
 	<?php endforeach; ?>
 </table>

@@ -1,4 +1,5 @@
 <?php
+defined('PDD') or die("<p style='color:#700;font:16px Roboto, Tahoma;'>Access Denied</p>");
 include_once 'model/admin_model.php';
 abstract class Core_Admin {
 	protected $m;

@@ -1,4 +1,5 @@
 <?php
+defined('PDD') or die("<p style='color:#700;font:16px Roboto, Tahoma;'>Access Denied</p>");
 class admin_model {
 	public $mysqli;
 	public function __construct() {
@@ -16,24 +17,24 @@ class admin_model {
 		$x = trim($x);
 		return $x;
 	}
-	private function sql_select($query) {
-		$stmt = $this->mysqli->stmt_init();
-		$stmt->prepare($query);
-		$stmt->execute();
-		$res = $stmt->get_result();
-		$stmt->close();
-		while($row = $res->fetch_array(MYSQLI_ASSOC)) {
-			$rows[] = $row;
-		}
-		return $rows;
+	public function print_ar($arr) {
+		echo '<pre>'.print_r($arr, true).'</pre>';
 	}
 	// Вывод авто новостей
 	public function edit_auto_news() {
 		try {
 			$cat = 'auto';
-			$edit = $this->sql_select("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
-			if(!$edit) throw new Exception("Error prepare edit_auto_news");
-			return $edit;
+			$query = "SELECT id_news, title, date FROM news WHERE cat = ?";
+			if(!$stmt = $this->mysqli->prepare($query)) throw new Exception("Error Prepare edit_auto_news", 1);
+			$stmt->bind_param('s', $cat);
+			$stmt->execute();
+			$stmt->bind_result($id_news, $title, $date);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $title, $date);
+			}
+			$stmt->close();
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 		}
@@ -42,9 +43,17 @@ class admin_model {
 	public function edit_moto_news() {
 		try {
 			$cat = 'moto';
-			$edit = $this->sql_select("SELECT id_news, title, date FROM news WHERE cat = '$cat'");
-			if(!$edit) throw new Exception("Error prepare edit_moto_news");
-			return $edit;
+			$query = "SELECT id_news, title, date FROM news WHERE cat = ?";
+			if(!$stmt = $this->mysqli->prepare($query)) throw new Exception("Error Prepare edit_moto_news", 1);
+			$stmt->bind_param('s', $cat);
+			$stmt->execute();
+			$stmt->bind_result($id_news, $title, $date);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_news, $title, $date);
+			}
+			$stmt->close();
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 		}
@@ -52,9 +61,16 @@ class admin_model {
 	// Вывод пдд
 	public function edit_pdd() {
 		try {
-			$edit = $this->sql_select("SELECT id_pdd, name_pdd FROM pdd");
-			if(!$edit) throw new Exception("Error prepare edit_pdd");
-			return $edit;
+			$query = "SELECT id_pdd, name_pdd FROM pdd";
+			if(!$stmt = $this->mysqli->prepare($query)) throw new Exception("Error Prepare edit_pdd", 1);
+			$stmt->execute();
+			$stmt->bind_result($id_pdd, $name_pdd);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_pdd, $name_pdd);
+			}
+			$stmt->close();
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 		}
@@ -62,9 +78,16 @@ class admin_model {
 	// Вывод пунктов меню
 	public function edit_menu() {
 		try {
-			$edit = $this->sql_select("SELECT id_menu, name_menu FROM menu");
-			if(!$edit) throw new Exception("Error prepare edit_menu");
-			return $edit;
+			$query = "SELECT id_menu, name_menu FROM menu";
+			if(!$stmt = $this->mysqli->prepare($query)) throw new Exception("Error Prepare edit_menu", 1);
+			$stmt->execute();
+			$stmt->bind_result($id_menu, $name_menu);
+			$rows = array();
+			while($stmt->fetch()) {
+				$rows[] = array($id_menu, $name_menu);
+			}
+			$stmt->close();
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 		}
@@ -102,8 +125,7 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO news (title, cat, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare add_auto_news");
 				}
 				$stmt->bind_param('ssssssss', $title, $cat, $description, $text, $meta_key, $meta_desc, $date, $img_src);
@@ -122,19 +144,20 @@ class admin_model {
 	public function get_text_auto_news($id_news) {
 		try {
 			$cat = 'auto';
-			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE cat = ? AND id_news = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare get_text_auto_news");
 			} else {
 				$stmt->bind_param('si', $cat, $id_news);
 				$stmt->execute();
-				$res = $stmt->get_result();
+				$stmt->bind_result($id_news, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+				$rows = array();
+				while($stmt->fetch()) {
+					$rows[] = array($id_news, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+				}
 				$stmt->close();
-				$row = $res->fetch_array(MYSQLI_ASSOC);
-				return $row;
 			}
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 			die();
@@ -163,8 +186,7 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_auto_news");
 				}
 				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
@@ -180,13 +202,11 @@ class admin_model {
 		}
 	}
 	// Удаление новостей
-	public function delete_auto_news() {
+	public function delete_auto_news($id_news) {
 		try {
 			$cat = 'auto';
-			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_auto_news");
 			}
 			$stmt->bind_param('si', $cat, $id_news);
@@ -233,8 +253,7 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO news (title, cat, description, text, meta_key, meta_desc, date, img_src) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare add_moto_news");
 				}
 				$stmt->bind_param('ssssssss', $title, $cat, $description, $text, $meta_key, $meta_desc, $date, $img_src);
@@ -253,19 +272,20 @@ class admin_model {
 	public function get_text_moto_news($id_news) {
 		try {
 			$cat = 'moto';
-			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "SELECT id_news, title, description, text, meta_key, meta_desc, date, img_src FROM news WHERE cat = ? AND id_news = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare get_text_moto_news");
 			} else {
 				$stmt->bind_param('si', $cat, $id_news);
 				$stmt->execute();
-				$res = $stmt->get_result();
+				$stmt->bind_result($id_news, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+				$rows = array();
+				while($stmt->fetch()) {
+					$rows[] = array($id_news, $title, $description, $text, $meta_key, $meta_desc, $date, $img_src);
+				}
 				$stmt->close();
-				$row = $res->fetch_array(MYSQLI_ASSOC);
-				return $row;
 			}
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 			die();
@@ -294,8 +314,7 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE news SET title = ?, description = ?, text = ?, meta_key = ?, meta_desc = ?, img_src = ? WHERE cat = ? AND id_news = ?";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_moto_news");
 				}
 				$stmt->bind_param('sssssssi', $title, $description, $text, $meta_key, $meta_desc, $img_src, $cat, $id_news);
@@ -311,13 +330,11 @@ class admin_model {
 		}
 	}
 	// Удаление мото новостей
-	public function delete_moto_news() {
+	public function delete_moto_news($id_news) {
 		try {
 			$cat = 'moto';
-			if(isset($_GET['id_news'])) $id_news = (int)($_GET['id_news']);
 			$query = "DELETE FROM news WHERE cat = ? AND id_news = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_moto_news");
 			}
 			$stmt->bind_param('si', $cat, $id_news);
@@ -344,8 +361,7 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO pdd (name_pdd, text_pdd) VALUES (?, ?)";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare add_pdd");
 				}
 				$stmt->bind_param('ss', $name_pdd, $text_pdd);
@@ -363,19 +379,20 @@ class admin_model {
 	// Получение текста ПДД
 	public function get_text_pdd($id_pdd) {
 		try {
-			if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
 			$query = "SELECT * FROM pdd WHERE id_pdd = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare get_text_pdd");
 			} else {
 				$stmt->bind_param('i', $id_pdd);
 				$stmt->execute();
-				$res = $stmt->get_result();
+				$stmt->bind_result($id_pdd, $name_pdd, $text_pdd);
+				$rows = array();
+				while($stmt->fetch()) {
+					$rows[] = array($id_pdd, $name_pdd, $text_pdd);
+				}
 				$stmt->close();
-				$row = $res->fetch_array(MYSQLI_ASSOC);
-				return $row;
 			}
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 			die();
@@ -393,8 +410,7 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE pdd SET name_pdd = ?, text_pdd = ? WHERE id_pdd = ?";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_pdd");
 				}
 				$stmt->bind_param('ssi', $name_pdd, $text_pdd, $id_pdd);
@@ -412,10 +428,8 @@ class admin_model {
 	// Удаление ПДД
 	public function delete_pdd() {
 		try {
-			if(isset($_GET['id_pdd'])) $id_pdd = (int)($_GET['id_pdd']);
 			$query = "DELETE FROM pdd WHERE id_pdd = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_pdd");
 			}
 			$stmt->bind_param('i', $id_pdd);
@@ -446,8 +460,7 @@ class admin_model {
 			}
 			try {
 				$query = "INSERT INTO menu (name_menu, text_menu, meta_key, meta_desc) VALUES (?, ?, ?, ?)";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare add_menu");
 				}
 				$stmt->bind_param('ssss', $name_menu, $text_menu, $meta_key, $meta_desc);
@@ -465,19 +478,20 @@ class admin_model {
 	// Получение текста меню
 	public function get_text_menu($id_menu) {
 		try {
-			if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
 			$query = "SELECT * FROM menu WHERE id_menu = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare get_text_menu");
 			} else {
 				$stmt->bind_param('i', $id_menu);
 				$stmt->execute();
-				$res = $stmt->get_result();
+				$stmt->bind_result($id_menu, $name_menu, $text_menu, $meta_key, $meta_desc);
+				$rows = array();
+				while($stmt->fetch()) {
+					$rows[] = array($id_menu, $name_menu, $text_menu, $meta_key, $meta_desc);
+				}
 				$stmt->close();
-				$row = $res->fetch_array(MYSQLI_ASSOC);
-				return $row;
 			}
+			return $rows;
 		} catch(Exception $e) {
 			print 'Ошибка: '.$e->getMessage();
 			die();
@@ -497,8 +511,7 @@ class admin_model {
 			}
 			try {
 				$query = "UPDATE menu SET name_menu = ?, text_menu = ?, meta_key = ?, meta_desc = ? WHERE id_menu = ?";
-				$stmt = $this->mysqli->stmt_init();
-				if(!$stmt->prepare($query)) {
+				if(!$stmt = $this->mysqli->prepare($query)) {
 					throw new Exception("Error prepare update_menu");
 				}
 				$stmt->bind_param('ssssi', $name_menu, $text_menu, $meta_key, $meta_desc, $id_menu);
@@ -514,12 +527,10 @@ class admin_model {
 		}
 	}
 	// Удаление пункта меню
-	public function delete_menu() {
+	public function delete_menu($id_menu) {
 		try {
-			if(isset($_GET['id_menu'])) $id_menu = (int)($_GET['id_menu']);
 			$query = "DELETE FROM menu WHERE id_menu = ?";
-			$stmt = $this->mysqli->stmt_init();
-			if(!$stmt->prepare($query)) {
+			if(!$stmt = $this->mysqli->prepare($query)) {
 				throw new Exception("Error prepare delete_menu");
 			}
 			$stmt->bind_param('i', $id_menu);
